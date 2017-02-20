@@ -43,10 +43,10 @@
     <div class="bg sh">
         <div class="w960 mw mglra">
             <div class="row">
-                <div class="cell pd curp navactive" .class="{navactive:curProductId==3}" click="loadData(3)">总览</div>
-                <div class="cell pd curp" .class="{navactive:curProductId==0}" click="loadData(0)">视频</div>
-                <div class="cell pd curp" .class="{navactive:curProductId==1}" click="loadData(1)">影院</div>
-                <div class="cell pd curp" .class="{navactive:curProductId==2}" click="loadData(2)">直播</div>
+                <div class="cell pd curp navactive" .class="{navactive:curProduct=='总览'}" click="this.curProduct='总览'">总览</div>
+                <div class="cell pd curp" .class="{navactive:curProduct=='视频'}" click="this.curProduct='视频'">视频</div>
+                <div class="cell pd curp" .class="{navactive:curProduct=='影院'}" click="this.curProduct='影院'">影院</div>
+                <div class="cell pd curp" .class="{navactive:curProduct=='直播'}" click="this.curProduct='直播'">直播</div>
                 <div class="cell fr muted">
                     <div class="cell pd xsnone">admin</div>
                     <div class="cell pd">退出</div>
@@ -70,17 +70,17 @@
                     <td class="pd1  ">今日
                         <span class="success">↑</span>
                     </td>
-                    <td class="pd1 pdl tr  bold" text="totalPv">----</td>
-                    <td class="pd1 pdl tr  bold">----</td>
-                    <td class="pd1 pdl tr  bold xsnone">----</td>
-                    <td class="pd1 pdl tr  bold">--:--:--</td>
+                    <td class="pd1 pdl tr  bold">99876</td>
+                    <td class="pd1 pdl tr  bold">98742</td>
+                    <td class="pd1 pdl tr  bold xsnone">95432</td>
+                    <td class="pd1 pdl tr  bold">00:36:45</td>
                 </tr>
                 <tr class="fs3">
                     <td class="pd1  ">昨日</td>
-                    <td class="pd1 pdl tr ">----</td>
-                    <td class="pd1 pdl tr ">----</td>
-                    <td class="pd1 pdl tr  xsnone">----</td>
-                    <td class="pd1 pdl tr ">--:--:--</td>
+                    <td class="pd1 pdl tr ">89840</td>
+                    <td class="pd1 pdl tr ">88756</td>
+                    <td class="pd1 pdl tr  xsnone">95432</td>
+                    <td class="pd1 pdl tr ">00:36:45</td>
                 </tr>
             </table>
         </div>
@@ -114,10 +114,10 @@
         </div>
         <!-- 图表 -->
         <div class="row cellpdlr mg-lr">
-            <div class="cell w24 xs24">
+            <div class="cell w12 xs24">
                 <div class="pdtb mgb bg sh animate fadeInUp-enter" style="animation-delay:.3s">
                     <div id="chart" class="mgb2" style="height:20em;"></div>
-                    <div class="pdlr none">
+                    <div class="pdlr">
                         <div class="table w24 tblf bd ra9 ovh tac muted">
                             <a class="cell bd pdtb1 curp btnsactive" .class="{btnsactive:time=='1小时'}" click="this.time='1小时';$event.preventDefault()">1小时</a>
                             <a class="cell bd pdtb1 curp" .class="{btnsactive:time=='6小时'}" click="this.time='6小时';$event.preventDefault()">6小时</a>
@@ -127,7 +127,7 @@
                     </div>
                 </div>
             </div>
-            <div class="cell w24 xs24 none">
+            <div class="cell w12 xs24">
                 <div class="pdtb mgb bg sh animate fadeInUp-enter" style="animation-delay:.3s">
                     <div id="chart" class="mgb2" style="height:20em;"></div>
                     <div class="pdlr">
@@ -142,45 +142,20 @@
             </div>
         </div>
     </div>
-    <script src="lib/ArrayX.min.js"></script>
+    <!-- <script src="lib/ArrayX.min.js"></script> -->
     <script src="lib/domTpl.js"></script>
-    <script src="lib/jquery.js"></script>
+    <!-- <script src="lib/jquery.js"></script> -->
     <!-- <script src="js/app.js"></script> -->
     <script>
     var dom = domTpl({
         loading: true,
-        curProductId: 3,
+        curProduct: '总览',
         pvuv: 'pv',
         time: '1天'
     });
     </script>
     <script src="lib/echarts.common.min.js"></script>
     <script type="text/javascript">
-    function dateFormat(date, format) {
-        var map = {
-            y: date.getFullYear(),
-            M: date.getMonth() + 1,
-            d: date.getDate(),
-            H: date.getHours(),
-            h: function() {
-                var h = date.getHours();
-                return h > 12 ? h - 12 : h
-            }(),
-            m: date.getMinutes(),
-            s: date.getSeconds(),
-            S: date.getMilliseconds()
-        };
-        for (var key in map) {
-            format = format.replace(RegExp(key + '+', 'g'), function(s) {
-                return (Array(s.length).join(0) + map[key]).slice(-s.length)
-            })
-        }
-
-        return format.replace(/E+/g, function() {
-            return '星期' + '日一二三四五六'.charAt(date.getDay());
-        })
-    }
-
     // data
     var dates = [];
     var yestodayPvs = [];
@@ -192,16 +167,35 @@
     var now = new Date;
     var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     var yestoday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
-    var tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-    var step = 1000 * 60 * 5;
+    var step = 1000 * 60 * 30;
 
-    // dates
+    // yestoday data
     for (var i = 0; true; i++) {
         var d = yestoday.getTime() + step * i;
         d = new Date(d);
-        if (d >= today) break;
+        var lastPv = (yestodayPvs[yestodayPvs.length - 1] || 50000);
+        var pv = lastPv + Math.random() * 10000 - 5000;
+        pv = pv < 10000 ? 10000 : pv;
+        pv = parseInt(pv);
+        var uv = pv - Math.random() * 5000;
+        uv = parseInt(uv);
+        if (d > today) break;
         dates.push(d.getHours() + ':' + d.getMinutes());
+        yestodayPvs.push(pv);
+        yestodayUvs.push(uv);
     }
+
+    // today date
+    for (var i = 0; i < yestodayPvs.length; i++) {
+        var yPv = yestodayPvs[i];
+        var pv = yPv + Math.random() * 10000 + 10000;
+        pv = parseInt(pv);
+        var uv = pv - Math.random() * 5000;
+        uv = parseInt(uv);
+        todayPvs.push(pv);
+        todayUvs.push(uv);
+    }
+
 
     // chart
     var myChart = echarts.init(document.getElementById('chart'));
@@ -240,14 +234,13 @@
             selected: {
                 '今PV': true,
                 '今UV': false,
-                '昨PV': false,
+                '昨PV': true,
                 '昨UV': false,
             }
         },
         grid: {
             // show: true,
             left: '45',
-            left: '55',
             // left: 0,
             top: '30',
             bottom: '40',
@@ -331,60 +324,10 @@
     myChart.setOption(option);
     addEventListener('resize', myChart.resize);
 
-    // load data
-    (function load(){
-	    loadData(dom.curProductId);
-    	setTimeout(load, 1000*60*.5);
-    }());
-    function loadData(productId) {
-        dom.curProductId = productId;
-
-        $.ajax({
-            url: 'http://10.200.65.16:8042/monitor/qryVisitInfo',
-            type: 'post',
-            headers: {
-                'Content-type': 'application/json;charset=UTF-8'
-            },
-            data: JSON.stringify({
-                "productId": dom.curProductId,
-                "startDate": dateFormat(today, 'yyyyMMdd000000'),
-                "endDate": dateFormat(tomorrow, 'yyyyMMdd000000'),
-                "statType": "1"
-            }),
-            dataType: 'json',
-            success: function(rsp) {
-                // error
-                if (!rsp || rsp.result) {
-                    alert(rsp.result + ':' + rsp.resultDesc);
-                    return;
-                }
-
-                // rsp:{datas:[]}
-                // chart
-                var datas = rsp.datas;
-                myChart.setOption({
-                    xAxis: {
-                        data: datas.map(function(item) {
-                            return item.time;
-                        })
-                    },
-                    series: [{
-                        name: '今PV',
-                        data: datas.map(function(item) {
-                            return item.pv
-                        })
-                    }]
-                });
-
-                // 
-                dom.$set({totalPv:rsp.totalPv});
-
-            },
-            error: function(rsp) {
-                console.log(rsp)
-            }
-        });
-    }
+    var v = V({
+    	title: 'this is title'
+    });
+    v.content = 'this is content';
     </script>
 </body>
 

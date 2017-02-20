@@ -1,0 +1,20 @@
+{
+    "cluster": [
+        { "id": 1, "name": "集群1" },
+        { "id": 2, "name": "集群2" }
+    ],
+    "service": [
+        { "id": 1, "clusterId":1, "name": "Flume" },
+        { "id": 2, "clusterId":1, "name": "HBase" },
+        { "id": 3, "clusterId":1, "name": "HDFS" },
+        { "id": 4, "clusterId":1, "name": "Hive" },
+        { "id": 5, "clusterId":2, "name": "Flume" },
+        { "id": 6, "clusterId":2, "name": "HBase" },
+        { "id": 7, "clusterId":2, "name": "HDFS" },
+        { "id": 8, "clusterId":2, "name": "Hive" }
+    ],
+    "isue":[
+    	{"serviceId":1, "number": 8},
+    	{"serviceId":6, "number": 18}
+    ]
+}
