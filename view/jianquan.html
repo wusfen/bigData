@@ -153,21 +153,21 @@
 
     // data
     var dates = [];
-    var yestodayPvs = [];
-    var yestodayUvs = [];
+    var yesterdayPvs = [];
+    var yesterdayUvs = [];
     var todayPvs = [];
     var todayUvs = [];
 
     // date
     var now = new Date;
     var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    var yestoday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+    var yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
     var tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
     var step = 1000 * 60 * 5;
 
     // dates
     for (var i = 0; true; i++) {
-        var d = yestoday.getTime() + step * i;
+        var d = yesterday.getTime() + step * i;
         d = new Date(d);
         if (d >= today) break;
         dates.push(dateFormat(d, 'HH:mm'));
@@ -292,7 +292,7 @@
                     width: 1
                 }
             },
-            data: yestodayPvs
+            data: yesterdayPvs
         }, {
             name: '昨UV',
             type: 'line',
@@ -302,7 +302,7 @@
                     width: 1
                 }
             },
-            data: yestodayUvs
+            data: yesterdayUvs
         }]
     };
 

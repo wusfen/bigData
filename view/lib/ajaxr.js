@@ -6,8 +6,8 @@
     var _send = XMLHttpRequest.prototype.send;
 
     XMLHttpRequest.prototype.send = function() {
-        _send.call(this);
-        // console.log(this);
+        _send.apply(this, arguments);
+        // console.log(this, arguments);
 
         // 注入
         var _onreadystatechange = this.onreadystatechange;
@@ -49,7 +49,7 @@
 
             // ajaxr ?
             if (window.localStorage && localStorage.ajaxr) {
-                console.info('ajaxr', options);
+                console.info('ajaxr', options.url, options.url2);
                 document.title = '★ajaxr★';
 
                 // url2

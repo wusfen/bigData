@@ -43,120 +43,144 @@
 </head>
 
 <body>
-    <!-- navbar -->
-    <div class="bg sh">
-        <div class="w960 mw mglra">
-            <div class="row">
-                <div class="cell pd curp" .class="{nav_at:nav==0}" click="this.nav=0; loadData()">门户</div>
-                <div class="cell pd curp" .class="{nav_at:nav==1}" click="this.nav=1; loadData()">gslb</div>
-                <div class="cell fr muted">
-                    <div class="cell pd">admin</div>
-                    <div class="cell pd">退出</div>
-                </div>
-            </div>
-        </div>
+    <!-- sidebar -->
+    <div class="sidebar">
+        <div class="pd bg c">DATA</div>
+        <div class="pd muted">menu</div>
+        <ul class="sidebar-menu">
+            <li>
+                集群管理
+                <ul>
+                    <li>
+                        <a href="">实时系统</a>
+                    </li>
+                    <li>
+                        <a href="">离线系统</a>
+                    </li>
+                    <li>
+                        <a href="">用户BI</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                报表管理
+                <ul>
+                    <li>
+                        <a href="">实时报表</a>
+                    </li>
+                    <li>
+                        <a href="">离线报表</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                系统管理
+                <ul>
+                    <li>
+                        <a href="">用户管理</a>
+                    </li>
+                    <li>
+                        <a href="">角色管理</a>
+                    </li>
+                    <li>
+                        <a href="">权限管理</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
     <!-- main -->
-    <div --if="!loading" class="w960 mw mglra">
-        <!-- 产品 -->
-        <div class="mgtb">
-            <div class="w960 mw mglra">
+    <div class="layout-main">
+        <!-- navbar -->
+        <div class="bg sh">
+            <div class="w24 mw mglra">
                 <div class="row">
-                    <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==3}" click="this.curProductId=3; loadData()">总览</div>
-                    <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==0}" click="this.curProductId=0; loadData()">视频</div>
-                    <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==1}" click="this.curProductId=1; loadData()">影院</div>
-                    <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==2}" click="this.curProductId=2; loadData()">直播</div>
-                    <!--  -->
-                    <div if="nav==0" class="cell pdlr pdtb2 curp" click="location.href='jianquan.html'">鉴权</div>
+                    <div class="cell fr muted">
+                        <div class="cell pd">admin</div>
+                        <div class="cell pd">退出</div>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- 今日流量 -->
-        <div class="pd mgtb bg sh animate fadeInUp-enter">
-            <table class="wf mgtbw">
-                <tr class="muted">
-                    <td class="pd1 pdl tr "></td>
-                    <td class="pd1 pdl tr ">PV</td>
-                    <td class="pd1 pdl tr ">UV</td>
-                </tr>
-                <tr>
-                    <td class="pd1  ">今日
-                        <span class="success">↑</span>
-                    </td>
-                    <td class="pd1 pdl tr  bold" text="nav??">----</td>
-                    <td class="pd1 pdl tr  bold">----</td>
-                </tr>
-                <tr class="fs3">
-                    <td class="pd1  ">昨日</td>
-                    <td class="pd1 pdl tr " text="yestodayTotalPv">----</td>
-                    <td class="pd1 pdl tr ">----</td>
-                </tr>
-            </table>
-        </div>
-        <!-- 峰值top -->
-        <div class="pd mgtb bg sh animate fadeInUp-enter" style="animation-delay:.15s">
-            <div class="table wf">
-                <div class="cell muted vab">
-                    vp tops
+        <!-- main content -->
+        <div>
+            <!-- main -->
+            <div --if="!loading" class="w24 mw pdlr mglra">
+                <!-- 产品 -->
+                <div class="mgtb">
+                    <div class="w24 mw mglra">
+                        <div class="row">
+                            <div class="cell pdlr pdtb2 curp" .class="{nav_at:nav==0}" click="this.nav=0; loadData()">门户</div>
+                            <div class="cell pdlr pdtb2 curp" .class="{nav_at:nav==1}" click="this.nav=1; loadData()">gslb</div>
+                            <!--  -->
+                            <div class="cell pdlr pdtb2">|</div>
+                            <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==3}" click="this.curProductId=3; loadData()">总览</div>
+                            <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==0}" click="this.curProductId=0; loadData()">视频</div>
+                            <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==1}" click="this.curProductId=1; loadData()">影院</div>
+                            <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==2}" click="this.curProductId=2; loadData()">直播</div>
+                            <!--  -->
+                            <div if="nav==0" class="cell pdlr pdtb2 curp" click="location.href='jianquan.html'">鉴权</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="cell">
-                    <div class="fs1 muted">21时</div>
-                    80000
+                <!-- 今日流量 -->
+                <div class="pd mgtb bg sh animate fadeInUp-enter">
+                    <table class="wf mgtbw tblf">
+                        <tr class="muted">
+                            <td class="pd1 pdl tr "></td>
+                            <td class="pd1 pdl tr ">PV</td>
+                            <td class="pd1 pdl tr ">UV</td>
+                        </tr>
+                        <tr>
+                            <td class="pd1  ">今日
+                                <span class="success">↑</span>
+                            </td>
+                            <td class="pd1 pdl tr  bold">{{pageData[nav||0][curProductId||0].pv.today}}</td>
+                            <td class="pd1 pdl tr  bold">{{pageData[nav||0][curProductId||0].uv.today}}</td>
+                        </tr>
+                        <tr class="fs3">
+                            <td class="pd1  ">昨日</td>
+                            <td class="pd1 pdl tr  bold">{{pageData[nav||0][curProductId||0].pv.yesterday}}</td>
+                            <td class="pd1 pdl tr  bold">{{pageData[nav||0][curProductId||0].uv.yesterday}}</td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="cell">
-                    <div class="fs1 muted">20时</div>
-                    70000
+                <!-- 峰值top -->
+                <div class="pd mgtb bg sh animate fadeInUp-enter ova" style="animation-delay:.15s">
+                    <div class="table w24">
+                        <div class="row">
+                            <div class="cell vab pdlr2 muted">
+                                pv tops
+                            </div>
+                            <div each="item in pageData[nav||0][curProductId||0].pv.tops" class="cell vab pdlr2">
+                                <div class="fs1 muted">{{item.time}}时</div>
+                                {{item.pv}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="cell vab pdlr2 muted">
+                                uv tops
+                            </div>
+                            <div each="item in pageData[nav||0][curProductId||0].uv.tops" class="cell vab pdlr2">
+                                <div class="fs1 muted">{{item.time}}时</div>
+                                {{item.uv}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="cell">
-                    <div class="fs1 muted">19时</div>
-                    60000
-                </div>
-                <div class="cell">
-                    <div class="fs1 muted">13时</div>
-                    30000
-                </div>
-                <div class="cell">
-                    <div class="fs1 muted">12时</div>
-                    10000
-                </div>
-            </div>
-            <div class="table wf mgt">
-                <div class="cell muted vab">
-                    uv tops
-                </div>
-                <div class="cell">
-                    <div class="fs1 muted">21时</div>
-                    80000
-                </div>
-                <div class="cell">
-                    <div class="fs1 muted">20时</div>
-                    70000
-                </div>
-                <div class="cell">
-                    <div class="fs1 muted">19时</div>
-                    60000
-                </div>
-                <div class="cell">
-                    <div class="fs1 muted">13时</div>
-                    30000
-                </div>
-                <div class="cell">
-                    <div class="fs1 muted">12时</div>
-                    10000
-                </div>
-            </div>
-        </div>
-        <!-- 图表 -->
-        <div class="row cellpdlr mg-lr mgtb">
-            <div class="cell w24 xs24">
-                <div class="pdtb mgb bg sh animate fadeInUp-enter" style="animation-delay:.3s">
-                    <div id="chart" class="" style="height:20em;"></div>
-                    <div class="pdlr tac">
-                        <div class="table inline xs24 tblf bd ra9 ovh tac muted">
-                            <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:time==24*60*60*1000}" click="this.time=24*60*60*1000;chartZoom();$event.preventDefault()">1 天</a>
-                            <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:time==12*60*60*1000}" click="this.time=12*60*60*1000;chartZoom();$event.preventDefault()">12小时</a>
-                            <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:time==6*60*60*1000}" click="this.time=6*60*60*1000;chartZoom();$event.preventDefault()">6小时</a>
-                            <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:time==1*60*60*1000}" click="this.time=1*60*60*1000;chartZoom();$event.preventDefault()">1小时</a>
+                <!-- 图表 -->
+                <div class="row cellpdlr mg-lr mgtb">
+                    <div class="cell w24 xs24">
+                        <div class="pdtb mgb bg sh animate fadeInUp-enter" style="animation-delay:.3s">
+                            <div id="chart" class="" style="height:20em;"></div>
+                            <div class="pdlr tac">
+                                <div class="table inline xs24 tblf bd ra9 ovh tac muted">
+                                    <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:time==24*60*60*1000}" click="this.time=24*60*60*1000;chartZoom();$event.preventDefault()">1 天</a>
+                                    <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:time==12*60*60*1000}" click="this.time=12*60*60*1000;chartZoom();$event.preventDefault()">12小时</a>
+                                    <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:time==6*60*60*1000}" click="this.time=6*60*60*1000;chartZoom();$event.preventDefault()">6小时</a>
+                                    <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:time==1*60*60*1000}" click="this.time=1*60*60*1000;chartZoom();$event.preventDefault()">1小时</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -191,13 +215,13 @@
     // date
     var now = new Date;
     var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    var yestoday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+    var yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
     var tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
     var step = 1000 * 60 * 5;
 
     // dates
     for (var i = 0; true; i++) {
-        var d = yestoday.getTime() + step * i;
+        var d = yesterday.getTime() + step * i;
         d = new Date(d);
         if (d >= today) break;
         dates.push(d.format('HH:mm'));
