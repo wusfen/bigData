@@ -439,6 +439,7 @@ html{overflow-x: hidden;}
 .inline{display:inline}
 .block{display:block}
 .inline.block{display:inline-block; *display:inline; *zoom:1}
+.inline.table{display:inline-table}
 
 /* float */
 .fl{float:left}

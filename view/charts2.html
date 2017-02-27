@@ -11,12 +11,16 @@
         background: #f5f5f5;
     }
     
-    .navactive {
+    .nav_at {
         color: #0af;
         border-bottom: solid 1px #0af;
     }
     
-    .btnsactive {
+    .menu_at {
+        color: #0af;
+    }
+    
+    .btn_at {
         background: #f5f5f5;
         color: #111;
     }
@@ -43,24 +47,10 @@
     <div class="bg sh">
         <div class="w960 mw mglra">
             <div class="row">
-                <div class="cell pd curp" .class="{navactive:curProductId==1}" click="this.curProductId=1; loadData()">门户</div>
-                <div class="cell pd curp" .class="{navactive:curProductId==2}" click="this.curProductId=2; loadData()">gslb</div>
+                <div class="cell pd curp" .class="{nav_at:nav==0}" click="this.nav=0; loadData()">门户</div>
+                <div class="cell pd curp" .class="{nav_at:nav==1}" click="this.nav=1; loadData()">gslb</div>
                 <div class="cell fr muted">
-                    <div class="cell pd xsnone">admin</div>
-                    <div class="cell pd">退出</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="bg sh">
-        <div class="w960 mw mglra">
-            <div class="row">
-                <div class="cell pd curp" .class="{navactive:curProductId==3}" click="this.curProductId=3; loadData()">总览</div>
-                <div class="cell pd curp" .class="{navactive:curProductId==0}" click="this.curProductId=0; loadData()">视频</div>
-                <div class="cell pd curp" .class="{navactive:curProductId==1}" click="this.curProductId=1; loadData()">影院</div>
-                <div class="cell pd curp" .class="{navactive:curProductId==2}" click="this.curProductId=2; loadData()">直播</div>
-                <div class="cell fr muted">
-                    <div class="cell pd xsnone">admin</div>
+                    <div class="cell pd">admin</div>
                     <div class="cell pd">退出</div>
                 </div>
             </div>
@@ -68,6 +58,19 @@
     </div>
     <!-- main -->
     <div --if="!loading" class="w960 mw mglra">
+        <!-- 产品 -->
+        <div class="mgtb">
+            <div class="w960 mw mglra">
+                <div class="row">
+                    <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==3}" click="this.curProductId=3; loadData()">总览</div>
+                    <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==0}" click="this.curProductId=0; loadData()">视频</div>
+                    <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==1}" click="this.curProductId=1; loadData()">影院</div>
+                    <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==2}" click="this.curProductId=2; loadData()">直播</div>
+                    <!--  -->
+                    <div if="nav==0" class="cell pdlr pdtb2 curp" click="location.href='jianquan.html'">鉴权</div>
+                </div>
+            </div>
+        </div>
         <!-- 今日流量 -->
         <div class="pd mgtb bg sh animate fadeInUp-enter">
             <table class="wf mgtbw">
@@ -75,32 +78,51 @@
                     <td class="pd1 pdl tr "></td>
                     <td class="pd1 pdl tr ">PV</td>
                     <td class="pd1 pdl tr ">UV</td>
-                    <td class="pd1 pdl tr  xsnone">IP数</td>
-                    <td class="pd1 pdl tr ">平均使用时长</td>
                 </tr>
                 <tr>
                     <td class="pd1  ">今日
                         <span class="success">↑</span>
                     </td>
-                    <td class="pd1 pdl tr  bold" text="totalPv">----</td>
+                    <td class="pd1 pdl tr  bold" text="nav??">----</td>
                     <td class="pd1 pdl tr  bold">----</td>
-                    <td class="pd1 pdl tr  bold xsnone">----</td>
-                    <td class="pd1 pdl tr  bold">--:--:--</td>
                 </tr>
                 <tr class="fs3">
                     <td class="pd1  ">昨日</td>
                     <td class="pd1 pdl tr " text="yestodayTotalPv">----</td>
                     <td class="pd1 pdl tr ">----</td>
-                    <td class="pd1 pdl tr  xsnone">----</td>
-                    <td class="pd1 pdl tr ">--:--:--</td>
                 </tr>
             </table>
         </div>
         <!-- 峰值top -->
         <div class="pd mgtb bg sh animate fadeInUp-enter" style="animation-delay:.15s">
             <div class="table wf">
-                <div class="cell muted vb">
-                    峰值top
+                <div class="cell muted vab">
+                    vp tops
+                </div>
+                <div class="cell">
+                    <div class="fs1 muted">21时</div>
+                    80000
+                </div>
+                <div class="cell">
+                    <div class="fs1 muted">20时</div>
+                    70000
+                </div>
+                <div class="cell">
+                    <div class="fs1 muted">19时</div>
+                    60000
+                </div>
+                <div class="cell">
+                    <div class="fs1 muted">13时</div>
+                    30000
+                </div>
+                <div class="cell">
+                    <div class="fs1 muted">12时</div>
+                    10000
+                </div>
+            </div>
+            <div class="table wf mgt">
+                <div class="cell muted vab">
+                    uv tops
                 </div>
                 <div class="cell">
                     <div class="fs1 muted">21时</div>
@@ -125,29 +147,16 @@
             </div>
         </div>
         <!-- 图表 -->
-        <div class="row cellpdlr mg-lr">
+        <div class="row cellpdlr mg-lr mgtb">
             <div class="cell w24 xs24">
                 <div class="pdtb mgb bg sh animate fadeInUp-enter" style="animation-delay:.3s">
-                    <div id="chart" class="mgb2" style="height:20em;"></div>
-                    <div class="pdlr">
-                        <div class="table w24 tblf bd ra9 ovh tac muted">
-                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==1*60*60*1000}" click="this.time=1*60*60*1000;$event.preventDefault()">1小时</a>
-                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==6*60*60*1000}" click="this.time=6*60*60*1000;$event.preventDefault()">6小时</a>
-                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==12*60*60*1000}" click="this.time=12*60*60*1000;$event.preventDefault()">12小时</a>
-                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==24*60*60*1000}" click="this.time=24*60*60*1000;$event.preventDefault()">1天</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="cell w24 xs24 none">
-                <div class="pdtb mgb bg sh animate fadeInUp-enter" style="animation-delay:.3s">
-                    <div id="chart" class="mgb2" style="height:20em;"></div>
-                    <div class="pdlr">
-                        <div class="table w24 tblf bd ra9 ovh tac muted">
-                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==1*60*60*1000}" click="this.time=1*60*60*1000;$event.preventDefault()">1小时</a>
-                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==6*60*60*1000}" click="this.time=6*60*60*1000;$event.preventDefault()">6小时</a>
-                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==12*60*60*1000}" click="this.time=12*60*60*1000;$event.preventDefault()">12小时</a>
-                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==24*60*60*1000}" click="this.time=24*60*60*1000;$event.preventDefault()">1天</a>
+                    <div id="chart" class="" style="height:20em;"></div>
+                    <div class="pdlr tac">
+                        <div class="table inline xs24 tblf bd ra9 ovh tac muted">
+                            <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:time==24*60*60*1000}" click="this.time=24*60*60*1000;chartZoom();$event.preventDefault()">1 天</a>
+                            <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:time==12*60*60*1000}" click="this.time=12*60*60*1000;chartZoom();$event.preventDefault()">12小时</a>
+                            <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:time==6*60*60*1000}" click="this.time=6*60*60*1000;chartZoom();$event.preventDefault()">6小时</a>
+                            <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:time==1*60*60*1000}" click="this.time=1*60*60*1000;chartZoom();$event.preventDefault()">1小时</a>
                         </div>
                     </div>
                 </div>
@@ -155,43 +164,23 @@
         </div>
     </div>
     <script src="lib/ArrayX.min.js"></script>
+    <script src="lib/Date.pro.format.js"></script>
     <script src="lib/domTpl.js"></script>
     <script src="lib/jquery.js"></script>
-    <!-- <script src="js/app.js"></script> -->
+    <script src="lib/ajaxr.js"></script>
+    <script src="lib/echarts.common.min.js"></script>
+    <script src="lib/wu.toast.js"></script>
+    <script src="js/chart.option.js"></script>
     <script>
     var dom = domTpl({
         loading: true,
+        nav: 0, // 门户 gslb
         curProductId: 3, // 当前产品id
-        time: 24*60*60*1000, // pvuv 线时长
+        pageData: null,
+        time: 24 * 60 * 60 * 1000, // pvuv 线时长
     });
     </script>
-    <script src="lib/echarts.common.min.js"></script>
     <script type="text/javascript">
-    function dateFormat(date, format) {
-        var map = {
-            y: date.getFullYear(),
-            M: date.getMonth() + 1,
-            d: date.getDate(),
-            H: date.getHours(),
-            h: function() {
-                var h = date.getHours();
-                return h > 12 ? h - 12 : h
-            }(),
-            m: date.getMinutes(),
-            s: date.getSeconds(),
-            S: date.getMilliseconds()
-        };
-        for (var key in map) {
-            format = format.replace(RegExp(key + '+', 'g'), function(s) {
-                return (Array(s.length).join(0) + map[key]).slice(-s.length)
-            })
-        }
-
-        return format.replace(/E+/g, function() {
-            return '星期' + '日一二三四五六'.charAt(date.getDay());
-        })
-    }
-
     // data
     var dates = [];
     var yestodayPvs = [];
@@ -211,221 +200,241 @@
         var d = yestoday.getTime() + step * i;
         d = new Date(d);
         if (d >= today) break;
-        dates.push(d.getHours() + ':' + d.getMinutes());
+        dates.push(d.format('HH:mm'));
     }
 
     // chart
     var myChart = echarts.init(document.getElementById('chart'));
-
-    option = {
-        // title: {
-        //     text: 'pv uv'
-        // },
-        tooltip: {
-            trigger: 'axis',
-            position: function(pt) {
-                // console.log(arguments)
-                return [pt[0] - 56, 'auto'];
-            },
-            confine: true,
-            animation: false,
-            axisPointer: {
-                animation: false
-            },
-            extraCssText: 'transition:none;box-shadow:1px 1px 10px #aaa;background:rgba(0,0,0,.5);bottom:100%;top:auto;margin-bottom:-30px;pointer-events:none',
-        },
-        legend: {
-            data: [{
-                icon: 'circle',
-                name: '今PV'
-            }, {
-                icon: 'circle',
-                name: '今UV'
-            }, {
-                icon: 'circle',
-                name: '昨PV'
-            }, {
-                icon: 'circle',
-                name: '昨UV'
-            }],
-            selected: {
-                '今PV': true,
-                '今UV': false,
-                '昨PV': true,
-                '昨UV': false,
-            }
-        },
-        grid: {
-            // show: true,
-            left: '45',
-            left: '55',
-            // left: 0,
-            top: '30',
-            bottom: '40',
-            right: '20',
-            // containLabel: true
-        },
-        xAxis: {
-            // type: 'time',
-            data: dates,
-            // splitLine: {
-            //     show: false
-            // },
-            axisTick: {
-                show: false,
-                inside: true
-            },
-            axisLabel: {
-                // inside: true
-            }
-        },
-        yAxis: {
-            axisTick: {
-                show: false,
-                inside: true
-            },
-            axisLabel: {
-                // inside: true,
-                // rotate: 45,
-                margin: 2,
-                formatter: function(value, index) {
-                    return value;
-                    return (value / 1000) + 'k'
-                }
-            },
-
-        },
-        color: ['#0af', '#21D100', '#FFD013', '#FF6767'],
-        series: [{
-            name: '今PV',
-            type: 'line',
-            showSymbol: false,
-            lineStyle: {
-                normal: {
-                    width: 2
-                }
-            },
-            data: todayPvs
-        }, {
-            name: '今UV',
-            type: 'line',
-            showSymbol: false,
-            lineStyle: {
-                normal: {
-                    width: 1
-                }
-            },
-            data: todayUvs
-        }, {
-            name: '昨PV',
-            type: 'line',
-            showSymbol: false,
-            lineStyle: {
-                normal: {
-                    width: 1
-                }
-            },
-            data: yestodayPvs
-        }, {
-            name: '昨UV',
-            type: 'line',
-            showSymbol: false,
-            lineStyle: {
-                normal: {
-                    width: 1
-                }
-            },
-            data: yestodayUvs
-        }]
-    };
-
-    myChart.setOption(option);
+    chartOption.xAxis = {
+        data: dates
+    }
+    myChart.setOption(chartOption);
     addEventListener('resize', myChart.resize);
+
+    function chartZoom() {
+        myChart.setOption({
+            dataZoom: [{
+                show: false,
+                start: 100 - dom.time / (24 * 60 * 60 * 1000) * 100,
+                end: 100
+            }],
+        });
+    }
 
     // load data
     function loadData() {
+        // 页面数据
+        loadPageData({
+            success: function(rsp) {
+                rsp[0] = rsp.pub;
+                rsp[1] = rsp.gsbl;
+                dom.pageData = rsp;
+                dom.$render();
+            }
+        });
 
         // 今天 pv
-        loadPvData(dom.curProductId, today, new Date(today.getTime()+dom.time), function(rsp) {
-            // chart
-            var datas = rsp.datas;
-            myChart.setOption({
-                xAxis: { // x坐标 todo better
-                    data: datas.map(function(item) {
-                        return item.time;
-                    })
-                },
-                series: [{
-                    name: '今PV',
-                    data: datas.map(function(item) {
-                        return item.pv
-                    })
-                }]
-            });
-
-            // 今天pv总数
-            dom.$set({
-                totalPv: rsp.totalPv
-            });
-
+        loadPvData({
+            url2: 'data/0.json',
+            nav: dom.nav,
+            productId: dom.curProductId,
+            startDate: new Date(tomorrow.getTime() - dom.time),
+            endDate: tomorrow,
+            success: function(rsp) {
+                // chart
+                var datas = rsp.datas;
+                myChart.setOption({
+                    series: [{
+                        name: '今PV',
+                        data: datas.map(function(item) {
+                            return [item.time, item.pv]
+                        })
+                    }]
+                });
+            }
         });
 
         // 昨天 pv
-        loadPvData(dom.curProductId, yestoday, new Date(yestoday.getTime()+dom.time), function(rsp) {
-            // chart
-            var datas = rsp.datas;
-            myChart.setOption({
-                xAxis: {
-                    data: datas.map(function(item) {
-                        return item.time;
-                    })
-                },
-                series: [{
-                    name: '昨PV',
-                    data: datas.map(function(item) {
-                        return item.pv
-                    })
-                }]
-            });
+        loadPvData({
+            url2: 'data/1.json',
+            nav: dom.nav,
+            productId: dom.curProductId,
+            startDate: new Date(today.getTime() - dom.time),
+            endDate: today,
+            success: function(rsp) {
+                // chart
+                datas = rsp.datas;
+                myChart.setOption({
+                    // xAxis: {
+                    //     data: datas.map(function(item) {
+                    //         return item.time;
+                    //     })
+                    // },
+                    series: [{
+                        name: '昨PV',
+                        data: datas.map(function(item) {
+                            return [item.time, item.pv]
+                        })
+                    }]
+                });
 
-            // 昨天pv总数
-            dom.$set({
-                yestodayTotalPv: rsp.totalPv
-            });
+                // 昨天pv总数
+                dom.$set({
+                    yestodayTotalPv: rsp.totalPv
+                });
 
+            }
+        });
+
+        // 今天 uv
+        loadUvData({
+            url2: 'data/0.json',
+            nav: dom.nav,
+            productId: dom.curProductId,
+            startDate: new Date(tomorrow.getTime() - dom.time),
+            endDate: tomorrow,
+            success: function(rsp) {
+                // chart
+                var datas = rsp.datas;
+                myChart.setOption({
+                    series: [{
+                        name: '今UV',
+                        data: datas.map(function(item) {
+                            return [item.time, item.uv]
+                        })
+                    }]
+                });
+            }
+        });
+
+        // 昨天 uv
+        loadUvData({
+            url2: 'data/1.json',
+            nav: dom.nav,
+            productId: dom.curProductId,
+            startDate: new Date(today.getTime() - dom.time),
+            endDate: today,
+            success: function(rsp) {
+                // chart
+                datas = rsp.datas;
+                myChart.setOption({
+                    // xAxis: {
+                    //     data: datas.map(function(item) {
+                    //         return item.time;
+                    //     })
+                    // },
+                    series: [{
+                        name: '昨UV',
+                        data: datas.map(function(item) {
+                            return [item.time, item.uv]
+                        })
+                    }]
+                });
+
+                // 昨天pv总数
+                dom.$set({
+                    yestodayTotalPv: rsp.totalPv
+                });
+
+            }
         });
     };
-    loadData(dom.curProductId);
-    setInterval(function() {
-        loadData(dom.curProductId);
-    }, 1000 * 60 * .5);
+    loadData(), setInterval(loadData, 1000 * 60 * .5);
 
-    function loadPvData(productId, startDate, endDate, fn) {
+
+    // 加载pv线
+    function loadPvData(options) {
         $.ajax({
-            url: 'http://10.200.65.16:8042/monitor/qryVisitInfo',
+            url: options.url || ['http://10.200.69.3:8042/monitor/qryVisitPvInfo',
+                'http://10.200.69.3:8042/monitor/qryGslbPvInfo'
+            ][options.nav],
+            url2: options.url2,
             type: 'post',
             headers: {
                 'Content-type': 'application/json;charset=UTF-8'
             },
             data: JSON.stringify({
-                "productId": productId,
-                "startDate": dateFormat(startDate, 'yyyyMMdd000000'),
-                "endDate": dateFormat(endDate, 'yyyyMMdd000000'),
+                "productId": options.productId,
+                "startDate": options.startDate.format('yyyyMMddHHmmss'),
+                "endDate": options.endDate.format('yyyyMMddHHmmss'),
                 "statType": "1"
             }),
             dataType: 'json',
             success: function(rsp) {
                 // error
                 if (!rsp || rsp.result) {
-                    alert(rsp.result + ':' + rsp.resultDesc);
+                    wu.toast(rsp.result + ':' + rsp.resultDesc);
                     return;
                 }
 
                 // handle
-                fn(rsp);
+                options.success(rsp);
             },
             error: function(rsp) {
-                alert('请求数据出错！');
+                wu.toast('请求数据出错！');
+                console.log(rsp)
+            }
+        });
+    }
+
+    // 加载uv线
+    function loadUvData(options) {
+        $.ajax({
+            url: options.url || ['http://10.200.69.3:8042/monitor/qryVisitUvInfo',
+                'http://10.200.69.3:8042/monitor/qryGslbUvInfo'
+            ][options.nav],
+            url2: options.url2,
+            type: 'post',
+            headers: {
+                'Content-type': 'application/json;charset=UTF-8'
+            },
+            data: JSON.stringify({
+                "productId": options.productId,
+                "startDate": options.startDate.format('yyyyMMddHHmmss'),
+                "endDate": options.endDate.format('yyyyMMddHHmmss'),
+                "statType": "1"
+            }),
+            dataType: 'json',
+            success: function(rsp) {
+                // error
+                if (!rsp || rsp.result) {
+                    wu.toast(rsp.result + ':' + rsp.resultDesc);
+                    return;
+                }
+
+                // handle
+                options.success(rsp);
+            },
+            error: function(rsp) {
+                wu.toast('请求数据出错！');
+                console.log(rsp)
+            }
+        });
+    }
+
+    // 加载页面数据
+    function loadPageData(options) {
+        $.ajax({
+            url: 'http://10.200.69.3:8042/monitor/qryVisitBrief',
+            url2: 'data/qryVisitBrief.json',
+            type: 'post',
+            headers: {
+                'Content-type': 'application/json;charset=UTF-8'
+            },
+            data: '{"productId":"1","startDate":"20170222000000","endDate":"20170223000000"}', // to delete
+            dataType: 'json',
+            success: function(rsp) {
+                // error
+                if (!rsp || rsp.result) {
+                    wu.toast(rsp.result + ':' + rsp.resultDesc);
+                    return;
+                }
+
+                // handle
+                options.success(rsp);
+            },
+            error: function(rsp) {
+                wu.toast('请求数据出错！');
                 console.log(rsp)
             }
         });

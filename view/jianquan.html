@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <link rel="stylesheet" type="text/css" href="css/ui.css">
-    <title>报表</title>
+    <title>鉴权</title>
     <style type="text/css">
     html {
         background: #f5f5f5;
@@ -47,110 +47,19 @@
     <div class="bg sh">
         <div class="w960 mw mglra">
             <div class="row">
-                <div class="cell pd curp" .class="{navactive:curMenu==0}" click="this.curMenu=0; loadData()">门户</div>
-                <div class="cell pd curp" .class="{navactive:curMenu==1}" click="this.curMenu=1; loadData()">gslb</div>
-                <div class="cell fr muted">
-                    <div class="cell pd xsnone">admin</div>
-                    <div class="cell pd">退出</div>
-                </div>
+                <div class="cell pd curp" click="location.href='charts2.html'">返回</div>
+                <div class="cell pd curp" .class="{navactive:curMenu==-1}" click="this.curMenu=-1; loadData()">鉴权</div>
             </div>
         </div>
     </div>
     <!-- main -->
     <div --if="!loading" class="w960 mw mglra">
-        <!-- 产品 -->
-        <div class="mgtb">
-            <div class="w960 mw mglra">
-                <div class="row">
-                    <div class="cell pdlr pdtb2 curp" .class="{menuactive:curProductId==3}" click="this.curProductId=3; loadData()">总览</div>
-                    <div class="cell pdlr pdtb2 curp" .class="{menuactive:curProductId==0}" click="this.curProductId=0; loadData()">视频</div>
-                    <div class="cell pdlr pdtb2 curp" .class="{menuactive:curProductId==1}" click="this.curProductId=1; loadData()">影院</div>
-                    <div class="cell pdlr pdtb2 curp" .class="{menuactive:curProductId==2}" click="this.curProductId=2; loadData()">直播</div>
-                    <div class="cell pdlr pdtb2 curp" .class="{menuactive:curProductId==999}" click="this.curProductId=999; loadData()">鉴权</div>
-                </div>
-            </div>
-        </div>
-        <!-- 今日流量 -->
-        <div class="pd mgtb bg sh animate fadeInUp-enter">
-            <table class="wf mgtbw">
-                <tr class="muted">
-                    <td class="pd1 pdl tr "></td>
-                    <td class="pd1 pdl tr ">PV</td>
-                    <td class="pd1 pdl tr ">UV</td>
-                </tr>
-                <tr>
-                    <td class="pd1  ">今日
-                        <span class="success">↑</span>
-                    </td>
-                    <td class="pd1 pdl tr  bold" text="totalPv">----</td>
-                    <td class="pd1 pdl tr  bold">----</td>
-                </tr>
-                <tr class="fs3">
-                    <td class="pd1  ">昨日</td>
-                    <td class="pd1 pdl tr " text="yestodayTotalPv">----</td>
-                    <td class="pd1 pdl tr ">----</td>
-                </tr>
-            </table>
-        </div>
-        <!-- 峰值top -->
-        <div class="pd mgtb bg sh animate fadeInUp-enter" style="animation-delay:.15s">
-            <div class="table wf">
-                <div class="cell muted vab">
-                    vp tops
-                </div>
-                <div class="cell">
-                    <div class="fs1 muted">21时</div>
-                    80000
-                </div>
-                <div class="cell">
-                    <div class="fs1 muted">20时</div>
-                    70000
-                </div>
-                <div class="cell">
-                    <div class="fs1 muted">19时</div>
-                    60000
-                </div>
-                <div class="cell">
-                    <div class="fs1 muted">13时</div>
-                    30000
-                </div>
-                <div class="cell">
-                    <div class="fs1 muted">12时</div>
-                    10000
-                </div>
-            </div>
-            <div class="table wf mgt">
-                <div class="cell muted vab">
-                    uv tops
-                </div>
-                <div class="cell">
-                    <div class="fs1 muted">21时</div>
-                    80000
-                </div>
-                <div class="cell">
-                    <div class="fs1 muted">20时</div>
-                    70000
-                </div>
-                <div class="cell">
-                    <div class="fs1 muted">19时</div>
-                    60000
-                </div>
-                <div class="cell">
-                    <div class="fs1 muted">13时</div>
-                    30000
-                </div>
-                <div class="cell">
-                    <div class="fs1 muted">12时</div>
-                    10000
-                </div>
-            </div>
-        </div>
         <!-- 图表 -->
-        <div class="row cellpdlr mg-lr">
-            <div class="cell w24 xs24">
-                <div class="pdtb mgb bg sh animate fadeInUp-enter" style="animation-delay:.3s">
-                    <div id="chart" class="mgb2" style="height:20em;"></div>
-                    <div class="pdlr">
+        <div class="row cellpdlr mg-lr mgtb">
+            <div class="cell w12 sm24">
+                <div class="pdtb mgb bg sh animate fadeInUp-enter" style="animation-delay:.0s">
+                    <div id="chart0" class="mgb2" style="height:20em;"></div>
+                    <div class="pdlr none">
                         <div class="table w24 tblf bd ra9 ovh tac muted">
                             <a class="cell bd pdtb1 curp" .class="{btnsactive:time==1*60*60*1000}" click="this.time=1*60*60*1000;loadData();$event.preventDefault()">1小时</a>
                             <a class="cell bd pdtb1 curp" .class="{btnsactive:time==6*60*60*1000}" click="this.time=6*60*60*1000;loadData();$event.preventDefault()">6小时</a>
@@ -160,10 +69,36 @@
                     </div>
                 </div>
             </div>
-            <div class="cell w24 xs24 none">
+            <div class="cell w12 sm24">
+                <div class="pdtb mgb bg sh animate fadeInUp-enter" style="animation-delay:.15s">
+                    <div id="chart1" class="mgb2" style="height:20em;"></div>
+                    <div class="pdlr none">
+                        <div class="table w24 tblf bd ra9 ovh tac muted">
+                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==1*60*60*1000}" click="this.time=1*60*60*1000;loadData();$event.preventDefault()">1小时</a>
+                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==6*60*60*1000}" click="this.time=6*60*60*1000;loadData();$event.preventDefault()">6小时</a>
+                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==12*60*60*1000}" click="this.time=12*60*60*1000;loadData();$event.preventDefault()">12小时</a>
+                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==24*60*60*1000}" click="this.time=24*60*60*1000;loadData();$event.preventDefault()">1天</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cell w12 sm24">
                 <div class="pdtb mgb bg sh animate fadeInUp-enter" style="animation-delay:.3s">
-                    <div id="chart" class="mgb2" style="height:20em;"></div>
-                    <div class="pdlr">
+                    <div id="chart2" class="mgb2" style="height:20em;"></div>
+                    <div class="pdlr none">
+                        <div class="table w24 tblf bd ra9 ovh tac muted">
+                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==1*60*60*1000}" click="this.time=1*60*60*1000;loadData();$event.preventDefault()">1小时</a>
+                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==6*60*60*1000}" click="this.time=6*60*60*1000;loadData();$event.preventDefault()">6小时</a>
+                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==12*60*60*1000}" click="this.time=12*60*60*1000;loadData();$event.preventDefault()">12小时</a>
+                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==24*60*60*1000}" click="this.time=24*60*60*1000;loadData();$event.preventDefault()">1天</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cell w12 sm24">
+                <div class="pdtb mgb bg sh animate fadeInUp-enter" style="animation-delay:.45s">
+                    <div id="chart3" class="mgb2" style="height:20em;"></div>
+                    <div class="pdlr none">
                         <div class="table w24 tblf bd ra9 ovh tac muted">
                             <a class="cell bd pdtb1 curp" .class="{btnsactive:time==1*60*60*1000}" click="this.time=1*60*60*1000;loadData();$event.preventDefault()">1小时</a>
                             <a class="cell bd pdtb1 curp" .class="{btnsactive:time==6*60*60*1000}" click="this.time=6*60*60*1000;loadData();$event.preventDefault()">6小时</a>
@@ -178,11 +113,12 @@
     <script src="lib/ArrayX.min.js"></script>
     <script src="lib/domTpl.js"></script>
     <script src="lib/jquery.js"></script>
+    <script src="lib/ajaxr.js"></script>
     <!-- <script src="js/app.js"></script> -->
     <script>
     var dom = domTpl({
         loading: true,
-        curMenu: 0, // 门户 gslb
+        curMenu: -1, // 门户 gslb
         curProductId: 3, // 当前产品id
         time: 24 * 60 * 60 * 1000, // pvuv 线时长
     });
@@ -238,12 +174,14 @@
     }
 
     // chart
-    var myChart = echarts.init(document.getElementById('chart'));
-
     option = {
-        // title: {
-        //     text: 'pv uv'
-        // },
+        title: {
+            text: '',
+            textStyle: {
+                fontSize: 10
+            },
+            left: 20
+        },
         tooltip: {
             trigger: 'axis',
             position: function(pt) {
@@ -263,13 +201,13 @@
                 name: '今PV'
             }, {
                 icon: 'circle',
-                name: '今UV'
+                // name: '今UV'
             }, {
                 icon: 'circle',
                 name: '昨PV'
             }, {
                 icon: 'circle',
-                name: '昨UV'
+                // name: '昨UV'
             }],
             selected: {
                 '今PV': true,
@@ -285,6 +223,7 @@
             // left: 0,
             top: '30',
             bottom: '40',
+            bottom: '60',
             right: '20',
             // containLabel: true
         },
@@ -318,6 +257,11 @@
             },
 
         },
+        dataZoom: [{
+            type: 'slider',
+            start: 0,
+            end: 100
+        }],
         color: ['#0af', '#21D100', '#FFD013', '#FF6767'],
         series: [{
             name: '今PV',
@@ -362,83 +306,80 @@
         }]
     };
 
-    myChart.setOption(option);
-    addEventListener('resize', myChart.resize);
+    // init
+    var charts = [];
+    for (var i = 0; i < 4; i++) {
+        var myChart = echarts.init(document.getElementById('chart' + i));
+        myChart.setOption(option);
+        myChart.setOption({
+            title: {
+                text: [
+                    'detailData.jsp',
+                    'livelistData.jsp',
+                    'detail/Detail.jsp',
+                    '其他 '
+                ][i]
+            },
+        });
+        addEventListener('resize', myChart.resize);
+        charts.push(myChart);
+    }
 
     // load data
     function loadData() {
-
-        // 今天 pv
-        loadPvData({
-            // url: 'data/0.json',
-            menu: dom.curMenu,
-            productId: dom.curProductId,
-            startDate: new Date(tomorrow.getTime() - dom.time),
-            endDate: tomorrow,
-            success: function(rsp) {
-                // chart
-                var datas = rsp.datas;
-                myChart.setOption({
-                    // xAxis: { // x坐标 todo better
-                    //     data: datas.map(function(item) {
-                    //         return item.time;
-                    //     })
-                    // },
-                    series: [{
-                        name: '今PV',
-                        data: datas.map(function(item) {
-                            return [item.time, item.pv]
-                        })
-                    }]
+        // 今天
+        for (var i = 0; i < 4; i++) {
+            + function(i) {
+                loadPvData({
+                    // url: 'data/1.json',
+                    productId: i,
+                    startDate: new Date(tomorrow.getTime() - dom.time),
+                    endDate: tomorrow,
+                    success: function(rsp) {
+                        // chart
+                        datas = rsp.datas;
+                        charts[i].setOption({
+                            series: [{
+                                name: '今PV',
+                                data: datas.map(function(item) {
+                                    return [item.time, item.pv]
+                                })
+                            }]
+                        });
+                    }
                 });
-
-                // 今天pv总数
-                dom.$set({
-                    totalPv: rsp.totalPv
+            }(i);
+        }
+        // 昨天
+        for (var i = 0; i < 4; i++) {
+            + function(i) {
+                loadPvData({
+                    // url: 'data/1.json',
+                    productId: i,
+                    startDate: new Date(today.getTime() - dom.time),
+                    endDate: today,
+                    success: function(rsp) {
+                        // chart
+                        datas = rsp.datas;
+                        charts[i].setOption({
+                            series: [{
+                                name: '昨PV',
+                                data: datas.map(function(item) {
+                                    return [item.time, item.pv]
+                                })
+                            }]
+                        });
+                    }
                 });
-
-            }
-        });
-
-        // 昨天 pv
-        loadPvData({
-            // url: 'data/1.json',
-            menu: dom.curMenu,
-            productId: dom.curProductId,
-            startDate: new Date(today.getTime() - dom.time),
-            endDate: today,
-            success: function(rsp) {
-                // chart
-                 datas = rsp.datas;
-                myChart.setOption({
-                    // xAxis: {
-                    //     data: datas.map(function(item) {
-                    //         return item.time;
-                    //     })
-                    // },
-                    series: [{
-                        name: '昨PV',
-                        data: datas.map(function(item) {
-                            return [item.time, item.pv]
-                        })
-                    }]
-                });
-
-                // 昨天pv总数
-                dom.$set({
-                    yestodayTotalPv: rsp.totalPv
-                });
-
-            }
-        });
+            }(i);
+        }
     };
     loadData(), setInterval(loadData, 1000 * 60 * .5);
 
     function loadPvData(options) {
         $.ajax({
-            url: options.url || ['http://10.200.65.16:8042/monitor/qryVisitInfo',
-                'http://10.200.65.16:8042/monitor/qryGslbInfo'
-            ][options.menu],
+            url: options.url || 'http://10.200.69.3:8042/monitor/qryWdRequireData',
+            url2: 'data/jianquan.json',
             type: 'post',
             headers: {
                 'Content-type': 'application/json;charset=UTF-8'

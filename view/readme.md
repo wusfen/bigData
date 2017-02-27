@@ -1,6 +1,8 @@
-http://10.200.65.16:8042/monitor/qryVisitInfo
+# PV
+门户: http://10.200.69.3:8042/monitor/qryVisitPvInfo 
+bsbl: http://10.200.69.3:8042/monitor/qryGslbPvInfo 
 
-POST请求，请求参数：{"productId":"0", "startDate":"2017021609050000", "endDate":"2017021623050000", "statType":"1"}
+POST请求，请求参数：{"productId":"0", "startDate":"20170216090500", "endDate":"20170216230500", "statType":"1"}
 
 productId:
 "0" - 视频 
@@ -15,95 +17,33 @@ statType:
 返回参数格式：
 {"result":0,"datas":[{"time":"09:20","pv":24000},{"time":"10:25","pv":26500},{"time":"09:25","pv":25500}],"resultDesc":"success"}
 
-```javascript
-    rsp = {
-        "datas": [{
-            "time": "08:15",
-            "pv": 22000
-        }, {
-            "time": "08:20",
-            "pv": 23000
-        }, {
-            "time": "09:20",
-            "pv": 24000
-        }, {
-            "time": "09:25",
-            "pv": 25500
-        }, {
-            "time": "10:25",
-            "pv": 26500
-        }, {
-            "time": "18:40",
-            "pv": 305668
-        }, {
-            "time": "18:45",
-            "pv": 577521
-        }, {
-            "time": "18:50",
-            "pv": 588902
-        }, {
-            "time": "18:55",
-            "pv": 625519
-        }, {
-            "time": "19:00",
-            "pv": 669914
-        }, {
-            "time": "19:05",
-            "pv": 696938
-        }, {
-            "time": "19:10",
-            "pv": 660388
-        }, {
-            "time": "19:15",
-            "pv": 659300
-        }, {
-            "time": "19:20",
-            "pv": 672094
-        }, {
-            "time": "19:25",
-            "pv": 728382
-        }, {
-            "time": "19:30",
-            "pv": 861087
-        }, {
-            "time": "19:35",
-            "pv": 1326346
-        }, {
-            "time": "19:40",
-            "pv": 1175468
-        }, {
-            "time": "19:45",
-            "pv": 1055532
-        }, {
-            "time": "19:50",
-            "pv": 924107
-        }, {
-            "time": "19:55",
-            "pv": 935819
-        }, {
-            "time": "20:00",
-            "pv": 924047
-        }, {
-            "time": "20:05",
-            "pv": 949596
-        }, {
-            "time": "20:10",
-            "pv": 879682
-        }, {
-            "time": "20:15",
-            "pv": 893280
-        }, {
-            "time": "20:20",
-            "pv": 1118594
-        }, {
-            "time": "20:25",
-            "pv": 1088563
-        }, {
-            "time": "20:30",
-            "pv": 1037996
-        }],
-        "result": 0,
-        "resultDesc": "success"
-    };
 
-```
+# UV
+http://10.200.69.3:8042/monitor/qryVisitUvInfo
+
+
+
+
+# 鉴权
+http://10.200.69.3:8042/monitor/qryWdRequireData
+
+{"productId":"1", "startDate":"20170222090500", "endDate":"20170222230000", "statType":"1"}
+
+productId 
+detailData.jsp     0
+livelistData.jsp    1
+detail或者Detail.jsp 2
+不包含的就是其他  3
+
+
+
+
+
+# 页面数据
+http://10.200.69.3:8042/monitor/qryVisitBrief
+http://10.200.69.3:8042/monitor/qryGslbBrief
+请求参数
+
+{"productId":"3","startDate":"20170222000000","endDate":"20170223000000"}
+
+0。视频，1，影院，2.直播，3 all
