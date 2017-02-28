@@ -111,10 +111,13 @@
         </div>
     </div>
     <script src="lib/ArrayX.min.js"></script>
+    <script src="lib/Date.pro.format.js"></script>
     <script src="lib/domTpl.js"></script>
     <script src="lib/jquery.js"></script>
     <script src="lib/ajaxr.js"></script>
-    <!-- <script src="js/app.js"></script> -->
+    <script src="lib/echarts.common.min.js"></script>
+    <script src="lib/wu.toast.js"></script>
+    <script src="js/chart.option.js"></script>
     <script>
     var dom = domTpl({
         loading: true,
@@ -174,143 +177,34 @@
     }
 
     // chart
-    option = {
-        title: {
-            text: '',
-            textStyle: {
-                fontSize: 10
-            },
-            left: 20
-        },
-        tooltip: {
-            trigger: 'axis',
-            position: function(pt) {
-                // console.log(arguments)
-                return [pt[0] - 56, 'auto'];
-            },
-            confine: true,
-            animation: false,
-            axisPointer: {
-                animation: false
-            },
-            extraCssText: 'transition:none;box-shadow:1px 1px 10px #aaa;background:rgba(0,0,0,.5);bottom:100%;top:auto;margin-bottom:-30px;pointer-events:none',
-        },
-        legend: {
-            data: [{
-                icon: 'circle',
-                name: '今PV'
-            }, {
-                icon: 'circle',
-                // name: '今UV'
-            }, {
-                icon: 'circle',
-                name: '昨PV'
-            }, {
-                icon: 'circle',
-                // name: '昨UV'
-            }],
-            selected: {
-                '今PV': true,
-                '今UV': false,
-                '昨PV': true,
-                '昨UV': false,
-            }
-        },
-        grid: {
-            // show: true,
-            left: '45',
-            left: '55',
-            // left: 0,
-            top: '30',
-            bottom: '40',
-            bottom: '60',
-            right: '20',
-            // containLabel: true
-        },
-        xAxis: {
-            // type: 'time',
-            data: dates,
-            // splitLine: {
-            //     show: false
-            // },
-            axisTick: {
-                show: false,
-                inside: true
-            },
-            axisLabel: {
-                // inside: true
-            }
-        },
-        yAxis: {
-            axisTick: {
-                show: false,
-                inside: true
-            },
-            axisLabel: {
-                // inside: true,
-                // rotate: 45,
-                margin: 2,
-                formatter: function(value, index) {
-                    return value;
-                    return (value / 1000) + 'k'
-                }
-            },
-
-        },
-        dataZoom: [{
-            type: 'slider',
-            start: 0,
-            end: 100
+    chartOption.xAxis = {
+        data: dates
+    }
+    chartOption.legend = {
+        data: [{
+            icon: 'circle',
+            name: '今PV'
+        }, {
+            icon: 'circle',
+            // name: '今UV'
+        }, {
+            icon: 'circle',
+            name: '昨PV'
+        }, {
+            icon: 'circle',
+            // name: '昨UV'
         }],
-        color: ['#0af', '#21D100', '#FFD013', '#FF6767'],
-        series: [{
-            name: '今PV',
-            type: 'line',
-            showSymbol: false,
-            lineStyle: {
-                normal: {
-                    width: 2
-                }
-            },
-            data: todayPvs
-        }, {
-            name: '今UV',
-            type: 'line',
-            showSymbol: false,
-            lineStyle: {
-                normal: {
-                    width: 1
-                }
-            },
-            data: todayUvs
-        }, {
-            name: '昨PV',
-            type: 'line',
-            showSymbol: false,
-            lineStyle: {
-                normal: {
-                    width: 1
-                }
-            },
-            data: yesterdayPvs
-        }, {
-            name: '昨UV',
-            type: 'line',
-            showSymbol: false,
-            lineStyle: {
-                normal: {
-                    width: 1
-                }
-            },
-            data: yesterdayUvs
-        }]
-    };
-
-    // init
+        selected: {
+            '今PV': true,
+            '今UV': false,
+            '昨PV': true,
+            '昨UV': false,
+        }
+    }
     var charts = [];
     for (var i = 0; i < 4; i++) {
         var myChart = echarts.init(document.getElementById('chart' + i));
-        myChart.setOption(option);
+        myChart.setOption(chartOption);
         myChart.setOption({
             title: {
                 text: [

@@ -95,6 +95,7 @@
         <div class="bg sh">
             <div class="w24 mw mglra">
                 <div class="row">
+                    <div class="cell pd sidebar-toggle">三</div>
                     <div class="cell fr muted">
                         <div class="cell pd">admin</div>
                         <div class="cell pd">退出</div>
@@ -110,16 +111,19 @@
                 <div class="mgtb">
                     <div class="w24 mw mglra">
                         <div class="row">
-                            <div class="cell pdlr pdtb2 curp" .class="{nav_at:nav==0}" click="this.nav=0; loadData()">门户</div>
-                            <div class="cell pdlr pdtb2 curp" .class="{nav_at:nav==1}" click="this.nav=1; loadData()">gslb</div>
-                            <!--  -->
-                            <div class="cell pdlr pdtb2">|</div>
-                            <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==3}" click="this.curProductId=3; loadData()">总览</div>
-                            <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==0}" click="this.curProductId=0; loadData()">视频</div>
-                            <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==1}" click="this.curProductId=1; loadData()">影院</div>
-                            <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==2}" click="this.curProductId=2; loadData()">直播</div>
-                            <!--  -->
-                            <div if="nav==0" class="cell pdlr pdtb2 curp" click="location.href='jianquan.html'">鉴权</div>
+                            <div class="cell">
+                                <div class="cell pdlr pdtb2 curp" .class="{nav_at:nav==0}" click="this.nav=0; loadData()">门户</div>
+                                <div class="cell pdlr pdtb2 curp" .class="{nav_at:nav==1}" click="this.nav=1; loadData()">gslb</div>
+                                <div class="cell pdlr pdtb2">|</div>
+                            </div>
+                            <div class="cell">
+                                <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==3}" click="this.curProductId=3; loadData()">总览</div>
+                                <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==0}" click="this.curProductId=0; loadData()">视频</div>
+                                <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==1}" click="this.curProductId=1; loadData()">影院</div>
+                                <div class="cell pdlr pdtb2 curp" .class="{menu_at:curProductId==2}" click="this.curProductId=2; loadData()">直播</div>
+                                <!--  -->
+                                <div if="nav==0" class="cell pdlr pdtb2 curp" click="location.href='jianquan.html'">鉴权</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -138,10 +142,10 @@
                             <td class="pd1 pdl tr  bold">{{pageData[nav||0][curProductId||0].pv.today}}</td>
                             <td class="pd1 pdl tr  bold">{{pageData[nav||0][curProductId||0].uv.today}}</td>
                         </tr>
-                        <tr class="fs3">
+                        <tr>
                             <td class="pd1  ">昨日</td>
-                            <td class="pd1 pdl tr  bold">{{pageData[nav||0][curProductId||0].pv.yesterday}}</td>
-                            <td class="pd1 pdl tr  bold">{{pageData[nav||0][curProductId||0].uv.yesterday}}</td>
+                            <td class="pd1 pdl tr muted">{{pageData[nav||0][curProductId||0].pv.yesterday}}</td>
+                            <td class="pd1 pdl tr muted">{{pageData[nav||0][curProductId||0].uv.yesterday}}</td>
                         </tr>
                     </table>
                 </div>
@@ -195,6 +199,7 @@
     <script src="lib/echarts.common.min.js"></script>
     <script src="lib/wu.toast.js"></script>
     <script src="js/chart.option.js"></script>
+    <script src="js/app.js"></script>
     <script>
     var dom = domTpl({
         loading: true,
@@ -213,15 +218,22 @@
     var todayUvs = [];
 
     // date
-    var now = new Date;
-    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    var yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
-    var tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-    var step = 1000 * 60 * 5;
+    var now;
+    var today;
+    var yesterday;
+    var tomorrow;
+    var updateDate = function() {
+        now = new Date;
+        today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+        tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    }
+    updateDate();
 
     // dates
+    var dateGap = 1000 * 60 * 5;
     for (var i = 0; true; i++) {
-        var d = yesterday.getTime() + step * i;
+        var d = yesterday.getTime() + dateGap * i;
         d = new Date(d);
         if (d >= today) break;
         dates.push(d.format('HH:mm'));
@@ -247,6 +259,9 @@
 
     // load data
     function loadData() {
+        // update date
+        updateDate();
+
         // 页面数据
         loadPageData({
             success: function(rsp) {
