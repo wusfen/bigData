@@ -15,7 +15,7 @@ chartOption = {
         },
         extraCssText: 'transition:none;box-shadow:1px 1px 10px #aaa;background:rgba(0,0,0,.5);bottom:100%;top:auto;margin-bottom:-30px;pointer-events:none',
     },
-    legend: {
+    xlegend: {
         data: [{
             icon: 'circle',
             name: '今PV'
@@ -97,7 +97,7 @@ chartOption = {
         showSymbol: false,
         lineStyle: {
             normal: {
-                width: 2
+                width: 1
             }
         },
         // data: todayPvs

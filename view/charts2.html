@@ -174,15 +174,28 @@
                 </div>
                 <!-- 图表 -->
                 <div class="row cellpdlr mg-lr mgtb">
-                    <div class="cell w24 xs24">
+                    <div class="cell w12 xs24">
                         <div class="pdtb mgb bg sh animate fadeInUp-enter" style="animation-delay:.3s">
-                            <div id="chart" class="" style="height:20em;"></div>
+                            <div id="pvChart" class="" style="height:20em;"></div>
                             <div class="pdlr tac">
                                 <div class="table inline xs24 tblf bd ra9 ovh tac muted">
-                                    <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:time==24*60*60*1000}" click="this.time=24*60*60*1000;chartZoom();$event.preventDefault()">1 天</a>
-                                    <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:time==12*60*60*1000}" click="this.time=12*60*60*1000;chartZoom();$event.preventDefault()">12小时</a>
-                                    <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:time==6*60*60*1000}" click="this.time=6*60*60*1000;chartZoom();$event.preventDefault()">6小时</a>
-                                    <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:time==1*60*60*1000}" click="this.time=1*60*60*1000;chartZoom();$event.preventDefault()">1小时</a>
+                                    <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:pvTimeLong==24*60*60*1000}" click="this.pvTimeLong=24*60*60*1000;pvChartZoom();$event.preventDefault()">1 天</a>
+                                    <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:pvTimeLong==12*60*60*1000}" click="this.pvTimeLong=12*60*60*1000;pvChartZoom();$event.preventDefault()">12小时</a>
+                                    <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:pvTimeLong==6*60*60*1000}" click="this.pvTimeLong=6*60*60*1000;pvChartZoom();$event.preventDefault()">6小时</a>
+                                    <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:pvTimeLong==1*60*60*1000}" click="this.pvTimeLong=1*60*60*1000;pvChartZoom();$event.preventDefault()">1小时</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cell w12 xs24">
+                        <div class="pdtb mgb bg sh animate fadeInUp-enter" style="animation-delay:.3s">
+                            <div id="uvChart" class="" style="height:20em;"></div>
+                            <div class="pdlr tac">
+                                <div class="table inline xs24 tblf bd ra9 ovh tac muted">
+                                    <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:uvTimeLong==24*60*60*1000}" click="this.uvTimeLong=24*60*60*1000;uvChartZoom();$event.preventDefault()">1 天</a>
+                                    <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:uvTimeLong==12*60*60*1000}" click="this.uvTimeLong=12*60*60*1000;uvChartZoom();$event.preventDefault()">12小时</a>
+                                    <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:uvTimeLong==6*60*60*1000}" click="this.uvTimeLong=6*60*60*1000;uvChartZoom();$event.preventDefault()">6小时</a>
+                                    <a href="#js" class="cell bd pd1 curp" style="width:4em" .class="{btn_at:uvTimeLong==1*60*60*1000}" click="this.uvTimeLong=1*60*60*1000;uvChartZoom();$event.preventDefault()">1小时</a>
                                 </div>
                             </div>
                         </div>
@@ -206,7 +219,8 @@
         nav: 0, // 门户 gslb
         curProductId: 3, // 当前产品id
         pageData: null,
-        time: 24 * 60 * 60 * 1000, // pvuv 线时长
+        pvTimeLong: 24 * 60 * 60 * 1000, // pv线时长
+        uvTimeLong: 24 * 60 * 60 * 1000, // uv 线时长
     });
     </script>
     <script type="text/javascript">
@@ -240,18 +254,97 @@
     }
 
     // chart
-    var myChart = echarts.init(document.getElementById('chart'));
-    chartOption.xAxis = {
-        data: dates
-    }
-    myChart.setOption(chartOption);
-    addEventListener('resize', myChart.resize);
+    var pvChart = echarts.init(document.getElementById('pvChart'));
+    var uvChart = echarts.init(document.getElementById('uvChart'));
+    $.extend(chartOption, {
+        xAxis: {
+            data: dates
+        }
+    });
+    pvChart.setOption($.extend({}, chartOption, {
+        color: ['#0af', '#FFD013'],
+        legend: {
+            data: [{
+                icon: 'circle',
+                name: '今PV'
+            }, {
+                icon: 'circle',
+                name: '昨PV'
+            }]
+        },
+        series: [{
+            name: '今PV',
+            type: 'line',
+            showSymbol: false,
+            lineStyle: {
+                normal: {
+                    width: 1
+                }
+            },
+            data: []
+        }, {
+            name: '昨PV',
+            type: 'line',
+            showSymbol: false,
+            lineStyle: {
+                normal: {
+                    width: 1
+                }
+            },
+            data: []
+        }]
+    }));
+    uvChart.setOption($.extend({}, chartOption, {
+        color: ['#21D100', '#FF6767'],
+        legend: {
+            data: [{
+                icon: 'circle',
+                name: '今UV'
+            }, {
+                icon: 'circle',
+                name: '昨UV'
+            }]
+        },
+        series: [{
+            name: '今UV',
+            type: 'line',
+            showSymbol: false,
+            lineStyle: {
+                normal: {
+                    width: 1
+                }
+            },
+            data: []
+        }, {
+            name: '昨UV',
+            type: 'line',
+            showSymbol: false,
+            lineStyle: {
+                normal: {
+                    width: 1
+                }
+            },
+            data: []
+        }]
+    }));
+    addEventListener('resize', pvChart.resize);
+    addEventListener('resize', uvChart.resize);
 
-    function chartZoom() {
-        myChart.setOption({
+    function pvChartZoom() {
+        pvChart.setOption({
             dataZoom: [{
                 show: false,
-                start: 100 - dom.time / (24 * 60 * 60 * 1000) * 100,
+                start: 100 - dom.pvTimeLong / (24 * 60 * 60 * 1000) * 100,
+                end: 100
+            }],
+        });
+    }
+
+    function uvChartZoom() {
+        uvChart.setOption({
+            dataZoom: [{
+                show: false,
+                start: 100 - dom.uvTimeLong / (24 * 60 * 60 * 1000) * 100,
                 end: 100
             }],
         });
@@ -274,15 +367,15 @@
 
         // 今天 pv
         loadPvData({
-            url2: 'data/0.json',
+            url2: 'data/pv2.json',
             nav: dom.nav,
             productId: dom.curProductId,
-            startDate: new Date(tomorrow.getTime() - dom.time),
+            startDate: new Date(tomorrow.getTime() - dom.pvTimeLong),
             endDate: tomorrow,
             success: function(rsp) {
                 // chart
                 var datas = rsp.datas;
-                myChart.setOption({
+                pvChart.setOption({
                     series: [{
                         name: '今PV',
                         data: datas.map(function(item) {
@@ -295,15 +388,15 @@
 
         // 昨天 pv
         loadPvData({
-            url2: 'data/1.json',
+            url2: 'data/pv.json',
             nav: dom.nav,
             productId: dom.curProductId,
-            startDate: new Date(today.getTime() - dom.time),
+            startDate: new Date(today.getTime() - dom.pvTimeLong),
             endDate: today,
             success: function(rsp) {
                 // chart
                 datas = rsp.datas;
-                myChart.setOption({
+                pvChart.setOption({
                     // xAxis: {
                     //     data: datas.map(function(item) {
                     //         return item.time;
@@ -316,26 +409,20 @@
                         })
                     }]
                 });
-
-                // 昨天pv总数
-                dom.$set({
-                    yestodayTotalPv: rsp.totalPv
-                });
-
             }
         });
 
         // 今天 uv
         loadUvData({
-            url2: 'data/0.json',
+            url2: 'data/uv2.json',
             nav: dom.nav,
             productId: dom.curProductId,
-            startDate: new Date(tomorrow.getTime() - dom.time),
+            startDate: new Date(tomorrow.getTime() - dom.uvTimeLong),
             endDate: tomorrow,
             success: function(rsp) {
                 // chart
                 var datas = rsp.datas;
-                myChart.setOption({
+                uvChart.setOption({
                     series: [{
                         name: '今UV',
                         data: datas.map(function(item) {
@@ -348,15 +435,15 @@
 
         // 昨天 uv
         loadUvData({
-            url2: 'data/1.json',
+            url2: 'data/uv.json',
             nav: dom.nav,
             productId: dom.curProductId,
-            startDate: new Date(today.getTime() - dom.time),
+            startDate: new Date(today.getTime() - dom.uvTimeLong),
             endDate: today,
             success: function(rsp) {
                 // chart
                 datas = rsp.datas;
-                myChart.setOption({
+                uvChart.setOption({
                     // xAxis: {
                     //     data: datas.map(function(item) {
                     //         return item.time;
@@ -369,12 +456,6 @@
                         })
                     }]
                 });
-
-                // 昨天pv总数
-                dom.$set({
-                    yestodayTotalPv: rsp.totalPv
-                });
-
             }
         });
     };
