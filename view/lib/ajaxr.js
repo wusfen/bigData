@@ -54,7 +54,7 @@
 
                 // url2
                 if (options.url2) {
-                    ajax($.extend({}, options, { url: options.url2 }));
+                    ajax($.extend({}, options, { type: 'get', url: options.url2 }));
                 }
             } else {
                 ajax(options);
