@@ -84,10 +84,10 @@ chartOption = {
         },
 
     },
-    xdataZoom: [{
+    dataZoom: [{
         type: 'slider',
         show: false,
-        start: 80,
+        start: 0,
         end: 100
     }],
     color: ['#0af', '#21D100', '#FFD013', '#FF6767'],

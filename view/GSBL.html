@@ -119,18 +119,19 @@
         <div>
             <!-- main -->
             <div --if="!loading" class="w24 mw pdlr mglra">
+                <!-- path -->
                 <div class="">
-                    <a class="inline block pd" href="">home</a>
+                    <a class="inline block pd" style="padding-left:0" href="index.html">home</a>
                     /
-                    <a class="inline block pd" href="">实时报表</a>
+                    <a class="inline block pd" href="实时报表.html">实时报表</a>
                     /
-                    <a class="inline block pd" href="">门户</a>
+                    <a class="inline block pd" href="GSBL.html">GSBL</a>
                 </div>
                 <!-- 产品 -->
-                <div class="mgtb">
+                <div class="">
                     <div class="w24 mw mglra">
                         <div class="row">
-                            <div class="cell">
+                            <div class="cell none">
                                 <div class="cell pdlr pdtb2 curp" .class="{nav_at:nav==0}" click="this.nav=0; loadData()">门户</div>
                                 <div class="cell pdlr pdtb2 curp" .class="{nav_at:nav==1}" click="this.nav=1; loadData()">gslb</div>
                                 <div class="cell pdlr pdtb2">|</div>
@@ -229,7 +230,7 @@
     <script>
     var dom = domTpl({
         loading: true,
-        nav: 0, // 门户 gslb
+        nav: 1, // 门户 gslb
         curProductId: 3, // 当前产品id
         pageData: null,
         pvTimeLong: 24 * 60 * 60 * 1000, // pv线时长

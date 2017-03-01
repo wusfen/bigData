@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="sidebar-open">
+<html>
 
 <head>
     <meta charset="utf-8">
@@ -16,8 +16,42 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
-    <title></title>
+    <title>报表</title>
     <link rel="stylesheet" type="text/css" href="css/ui.css">
+    <style type="text/css">
+    html {
+        background: #f5f5f5;
+    }
+    
+    .nav_at {
+        color: #0af;
+        border-bottom: solid 1px #0af;
+    }
+    
+    .menu_at {
+        color: #0af;
+    }
+    
+    .btn_at {
+        background: #f5f5f5;
+        color: #111;
+    }
+    </style>
+    <!-- theme -->
+    <style type="text/cssx">
+    html {
+        background: #282D33;
+        color: #cbEEFF;
+    }
+    
+    .sh {
+        box-shadow: 0 1px 5px rgba(4, 0, 0, 0.55)
+    }
+    
+    .bg {
+        background: #182635;
+    }
+    </style>
 </head>
 
 <body>
@@ -73,6 +107,7 @@
         <div class="bg sh">
             <div class="w24 mw mglra">
                 <div class="row">
+                    <div class="cell pd sidebar-toggle">三</div>
                     <div class="cell fr muted">
                         <div class="cell pd">admin</div>
                         <div class="cell pd">退出</div>
@@ -80,7 +115,34 @@
                 </div>
             </div>
         </div>
+        <!-- main content -->
+        <div>
+            <!-- main -->
+            <div --if="!loading" class="w24 mw pdlr mglra">
+                <!-- path -->
+                <div class="">
+                    <a class="inline block pd" style="padding-left:0" href="index.html">home</a>
+                    /
+                    <a class="inline block pd" href="实时报表.html">实时报表</a>
+                </div>
+                <!-- =========== -->
+                <div class="row">
+                    <a class="cell xs24 tac bg sh ra" style="min-width: 14em; height: 7em; line-height: 7em; margin:0 1em 1em 0" href="门户.html">门户</a>
+                    <a class="cell xs24 tac bg sh ra" style="min-width: 14em; height: 7em; line-height: 7em; margin:0 1em 1em 0" href="GSBL.html">GSBL</a>
+                    
+                </div>
+            </div>
+        </div>
     </div>
+    <script src="lib/ArrayX.min.js"></script>
+    <script src="lib/Date.pro.format.js"></script>
+    <script src="lib/domTpl.js"></script>
+    <script src="lib/jquery.js"></script>
+    <script src="lib/ajaxr.js"></script>
+    <script src="lib/echarts.common.min.js"></script>
+    <script src="lib/wu.toast.js"></script>
+    <script src="js/chart.option.js"></script>
+    <script src="js/app.js"></script>
 </body>
 
 </html>
