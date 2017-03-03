@@ -121,7 +121,7 @@
             <div --if="!loading" class="w24 mw pdlr mglra">
                 <!-- path -->
                 <div class="">
-                    <a class="inline block pd" style="padding-left:0" href="index.html">home</a>
+                    <a class="inline block pd" style="padding-left:0" href="index.html">首页</a>
                     /
                     <a class="inline block pd" href="charts.html">charts</a>
                     /
@@ -407,7 +407,7 @@
         loadPageData({
             success: function(rsp) {
                 rsp[0] = rsp.pub;
-                rsp[1] = rsp.gsbl;
+                rsp[1] = rsp.gslb;
                 dom.pageData = rsp;
                 dom.$render();
             }
