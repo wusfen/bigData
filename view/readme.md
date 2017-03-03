@@ -1,5 +1,5 @@
 # PV
-门户: http://10.200.69.3:8042/monitor/qryVisitPvInfo 
+protal: http://10.200.69.3:8042/monitor/qryVisitPvInfo 
 bsbl: http://10.200.69.3:8042/monitor/qryGslbPvInfo 
 
 POST请求，请求参数：{"productId":"0", "startDate":"20170216090500", "endDate":"20170216230500", "statType":"1"}
@@ -24,7 +24,7 @@ http://10.200.69.3:8042/monitor/qryVisitUvInfo
 
 
 
-# 鉴权
+# auth
 http://10.200.69.3:8042/monitor/qryWdRequireData
 
 {"productId":"1", "startDate":"20170222090500", "endDate":"20170222230000", "statType":"1"}
@@ -47,3 +47,16 @@ http://10.200.69.3:8042/monitor/qryGslbBrief
 {"productId":"3","startDate":"20170222000000","endDate":"20170223000000"}
 
 0。视频，1，影院，2.直播，3 all
+
+
+
+
+
+# 部署
+10.200.65.16
+10.200.65.24
+hadoop/hadoop123!@#
+
+C:\Program Files (x86)\WinSCP
+
+/usr/local/tomcat_monitor/webapps/monitor

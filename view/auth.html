@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/ui.css">
+    <title>auth</title>
+    <style type="text/css">
+    html {
+        background: #f5f5f5;
+    }
+    
+    .navactive {
+        color: #0af;
+        border-bottom: solid 1px #0af;
+    }
+    
+    .menu_at {
+        color: #0af;
+    }
+    
+    .btnsactive {
+        background: #f5f5f5;
+        color: #111;
+    }
+    </style>
+    <!-- theme -->
+    <style type="text/cssx">
+    html {
+        background: #282D33;
+        color: #cbEEFF;
+    }
+    
+    .sh {
+        box-shadow: 0 1px 5px rgba(4, 0, 0, 0.55)
+    }
+    
+    .bg {
+        background: #182635;
+    }
+    </style>
+</head>
+
+<body>
+    <!-- navbar -->
+    <div class="bg sh">
+        <div class="w960 mw mglra">
+            <div class="row">
+                <div class="cell pd curp" click="history.back()">返回</div>
+                <div class="cell pd curp" .class="{navactive:curMenu==-1}" click="this.curMenu=-1; loadData()">鉴权</div>
+            </div>
+        </div>
+    </div>
+    <!-- main -->
+    <div --if="!loading" class="w960 mw mglra">
+        <!-- menu -->
+        <div class="row mgtb">
+            <div class="cell pdlr pdtb2 curp menu_at" .class="{menu_at:curProductId==-1}" click="this.curProductId=-1; loadData()">总和</div>
+            <div class="cell pdlr pdtb2 curp menu_at" .class="{menu_at:curProductId==0}" click="this.curProductId=0; loadData()">detailData.jsp</div>
+            <div class="cell pdlr pdtb2 curp menu_at" .class="{menu_at:curProductId==1}" click="this.curProductId=1; loadData()">livelistData.jsp</div>
+            <div class="cell pdlr pdtb2 curp menu_at" .class="{menu_at:curProductId==2}" click="this.curProductId=2; loadData()">detail/Detail.jsp</div>
+            <div class="cell pdlr pdtb2 curp menu_at" .class="{menu_at:curProductId==3}" click="this.curProductId=3; loadData()">其他 </div>
+        </div>
+        <!-- 图表 -->
+        <div class="row cellpdlr mg-lr mgtb">
+            <div class="cell w24 sm24">
+                <div class="pdtb mgb bg sh animate fadeInUp-enter" style="animation-delay:.0s">
+                    <div id="chart" class="mgb2" style="height:20em;"></div>
+                    <div class="pdlr none">
+                        <div class="table w24 tblf bd ra9 ovh tac muted">
+                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==1*60*60*1000}" click="this.time=1*60*60*1000;loadData();$event.preventDefault()">1小时</a>
+                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==6*60*60*1000}" click="this.time=6*60*60*1000;loadData();$event.preventDefault()">6小时</a>
+                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==12*60*60*1000}" click="this.time=12*60*60*1000;loadData();$event.preventDefault()">12小时</a>
+                            <a class="cell bd pdtb1 curp" .class="{btnsactive:time==24*60*60*1000}" click="this.time=24*60*60*1000;loadData();$event.preventDefault()">1天</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="lib/ArrayX.min.js"></script>
+    <script src="lib/Date.pro.format.js"></script>
+    <script src="lib/domTpl.js"></script>
+    <script src="lib/jquery.js"></script>
+    <script src="lib/ajaxr.js"></script>
+    <script src="lib/echarts.common.min.js"></script>
+    <script src="lib/wu.toast.js"></script>
+    <script src="js/chart.option.js"></script>
+    <script>
+    var dom = domTpl({
+        loading: true,
+        curMenu: -1, // protal gslb
+        curProductId: -1, // 当前产品id
+        time: 24 * 60 * 60 * 1000, // pvuv 线时长
+    });
+    </script>
+    <script src="lib/echarts.common.min.js"></script>
+    <script src="lib/wu.toast.js"></script>
+    <script type="text/javascript">
+    var host = 'http://117.131.17.93:8042';
+
+    function dateFormat(date, format) {
+        var map = {
+            y: date.getFullYear(),
+            M: date.getMonth() + 1,
+            d: date.getDate(),
+            H: date.getHours(),
+            h: function() {
+                var h = date.getHours();
+                return h > 12 ? h - 12 : h
+            }(),
+            m: date.getMinutes(),
+            s: date.getSeconds(),
+            S: date.getMilliseconds()
+        };
+        for (var key in map) {
+            format = format.replace(RegExp(key + '+', 'g'), function(s) {
+                return (Array(s.length).join(0) + map[key]).slice(-s.length)
+            })
+        }
+
+        return format.replace(/E+/g, function() {
+            return '星期' + '日一二三四五六'.charAt(date.getDay());
+        })
+    }
+
+    // data
+    var dates = [];
+    var yesterdayPvs = [];
+    var yesterdayUvs = [];
+    var todayPvs = [];
+    var todayUvs = [];
+
+    // date
+    var now = new Date;
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+    var tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    var step = 1000 * 60 * 5;
+
+    // dates
+    for (var i = 0; true; i++) {
+        var d = yesterday.getTime() + step * i;
+        d = new Date(d);
+        if (d >= today) break;
+        dates.push(dateFormat(d, 'HH:mm'));
+    }
+
+    // chart
+    chartOption.xAxis = {
+        data: dates
+    }
+    chartOption.legend = {
+        data: [{
+            icon: 'circle',
+            name: '今PV'
+        }, {
+            icon: 'circle',
+            // name: '今UV'
+        }, {
+            icon: 'circle',
+            name: '昨PV'
+        }, {
+            icon: 'circle',
+            // name: '昨UV'
+        }],
+        selected: {
+            '今PV': true,
+            '今UV': false,
+            '昨PV': true,
+            '昨UV': false,
+        }
+    }
+    var chart = echarts.init(document.getElementById('chart'));
+    chart.setOption(chartOption);
+    addEventListener('resize', chart.resize);
+
+    // load data
+    function loadData() {
+        // 今天
+        loadPvData({
+            // url: 'data/1.json',
+            productId: dom.curProductId,
+            startDate: new Date(tomorrow.getTime() - dom.time),
+            endDate: tomorrow,
+            success: function(rsp) {
+                // chart
+                datas = rsp.datas;
+                chart.setOption({
+                    series: [{
+                        name: '今PV',
+                        data: datas.map(function(item) {
+                            return [item.time, item.pv]
+                        })
+                    }]
+                });
+            }
+        });
+        // 昨天
+        loadPvData({
+            // url: 'data/1.json',
+            productId: dom.curProductId,
+            startDate: new Date(today.getTime() - dom.time),
+            endDate: today,
+            success: function(rsp) {
+                // chart
+                datas = rsp.datas;
+                chart.setOption({
+                    series: [{
+                        name: '昨PV',
+                        data: datas.map(function(item) {
+                            return [item.time, item.pv]
+                        })
+                    }]
+                });
+            }
+        });
+    };
+    loadData(), setInterval(loadData, 1000 * 60 * .5);
+
+    function loadPvData(options) {
+        // all url
+        if (dom.curProductId == -1) {
+            options.url = host + '/monitor/qryWdRequireDataOverall';
+        }
+
+        $.ajax({
+            url: options.url || host + '/monitor/qryWdRequireData',
+            url2: 'data/jianquan.json',
+            type: 'post',
+            headers: {
+                'Content-type': 'application/json;charset=UTF-8'
+            },
+            data: JSON.stringify({
+                "productId": options.productId,
+                "startDate": dateFormat(options.startDate, 'yyyyMMddHHmmss'),
+                "endDate": dateFormat(options.endDate, 'yyyyMMddHHmmss'),
+                "statType": "1"
+            }),
+            dataType: 'json',
+            success: function(rsp) {
+                // error
+                if (!rsp || rsp.result) {
+                    wu.toast(rsp.result + ':' + rsp.resultDesc);
+                    return;
+                }
+
+                // handle
+                options.success(rsp);
+            },
+            error: function(rsp) {
+                wu.toast('请求数据出错！');
+                console.log(rsp)
+            }
+        });
+    }
+    </script>
+</body>
+
+</html>

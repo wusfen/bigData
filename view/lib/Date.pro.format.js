@@ -6,7 +6,7 @@
  * 
  * console.log(new Date(2017,11-1,30, 12,30,40).format('yyyy-MM-dd HH:mm:ss'))
  * 
- * @param  {String} format 'yyy-MM-dd HH:mm:ss E'
+ * @param  {String} format 'yyyy-MM-dd HH:mm:ss E'
  * @return {String}
  */
 Date.prototype.format = function(format) {

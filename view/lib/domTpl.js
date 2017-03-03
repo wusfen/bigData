@@ -444,12 +444,22 @@
             // node.value = obj[key]; // 当 select 的 option 已不存在，把它置为 "";
             // obj[key] = node.value; // 再确保是一致的
 
+            // checkbox
+            if (node.type == 'checkbox') {
+                node.checked = value;
+            }
+
             bool && (node.selectionStart = node.selectionEnd = selectionStart);
         }
 
         // view->data
         on(nid, 'model', function() { // 自定义事件 'input' : 'keyup'
             obj[key] = node.value;
+
+            // checkbox
+            if (node.type == 'checkbox') {
+                obj[key] = node.checked;
+            }
         }, _data_);
     }
 
