@@ -257,7 +257,7 @@
         uvTimeLong: 24 * 60 * 60 * 1000, // uv 线时长
         hasUser: true,
         hasTourist: true,
-        date: new Date().format('yyyy-MM-dd 00:00:00')
+        date: new Date().format('yyyy-MM-dd')
     });
     </script>
     <script src="lib/jquery.js"></script>
@@ -289,7 +289,7 @@
         today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
         yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
         tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-        date = new Date(dom.date);
+        date = new Date(dom.date + ' 00:00:00');
         preDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
         nextDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
     }

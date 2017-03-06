@@ -76,10 +76,15 @@ chartOption = {
             // inside: true,
             // rotate: 45,
             margin: 2,
-            formatter: function(value, index) {
-                return (value + '').split('').reverse().join('')
-                    .replace(/\d{8}(?=\d)/g, '亿').replace(/\d{4}(?=\d)/g, '万')
-                    .split('').reverse().join('')
+            formatter: function f(value, index) {
+                for (var i = 0; true; i++) {
+                    var v = value / 10000;
+                    if (v < 1) break;
+                    value = v;
+                }
+                return (+value.toFixed(1)) +
+                    Array(i % 2 + 1).join('万') +
+                    Array(parseInt(i / 2) + 1).join('亿')
             }
         },
 
