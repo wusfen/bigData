@@ -68,11 +68,11 @@
     <div --if="!loading" class="w960 mw mglra">
         <!-- menu -->
         <div class="row mgtb">
-            <div class="cell pdlr pdtb2 curp menu_at" .class="{menu_at:curProductId==-1}" click="this.curProductId=-1; loadData()">总和</div>
-            <div class="cell pdlr pdtb2 curp menu_at" .class="{menu_at:curProductId==0}" click="this.curProductId=0; loadData()">detailData.jsp</div>
-            <div class="cell pdlr pdtb2 curp menu_at" .class="{menu_at:curProductId==1}" click="this.curProductId=1; loadData()">livelistData.jsp</div>
-            <div class="cell pdlr pdtb2 curp menu_at" .class="{menu_at:curProductId==2}" click="this.curProductId=2; loadData()">detail/Detail.jsp</div>
-            <div class="cell pdlr pdtb2 curp menu_at" .class="{menu_at:curProductId==3}" click="this.curProductId=3; loadData()">其他 </div>
+            <div class="cell pdlr pdtb2 curp menu_at" .class="{menu_at:productId==-1}" click="this.productId=-1; loadData()">总和</div>
+            <div class="cell pdlr pdtb2 curp menu_at" .class="{menu_at:productId==0}" click="this.productId=0; loadData()">detailData.jsp</div>
+            <div class="cell pdlr pdtb2 curp menu_at" .class="{menu_at:productId==1}" click="this.productId=1; loadData()">livelistData.jsp</div>
+            <div class="cell pdlr pdtb2 curp menu_at" .class="{menu_at:productId==2}" click="this.productId=2; loadData()">detail/Detail.jsp</div>
+            <div class="cell pdlr pdtb2 curp menu_at" .class="{menu_at:productId==3}" click="this.productId=3; loadData()">其他 </div>
         </div>
         <!-- 图表 -->
         <div class="row cellpdlr mg-lr mgtb">
@@ -100,43 +100,18 @@
     <script src="lib/echarts.common.min.js"></script>
     <script src="lib/wu.toast.js"></script>
     <script src="js/chart.option.js"></script>
+    <script src="js/app.js"></script>
     <script>
     var dom = domTpl({
         loading: true,
         curMenu: -1, // protal gslb
-        curProductId: -1, // 当前产品id
+        productId: -1, // 当前产品id
         pvTimeLong: 24 * 60 * 60 * 1000, // pvuv 线时长
     });
     </script>
     <script src="lib/echarts.common.min.js"></script>
     <script src="lib/wu.toast.js"></script>
     <script type="text/javascript">
-    var host = 'http://117.131.17.93:8042';
-
-    function dateFormat(date, format) {
-        var map = {
-            y: date.getFullYear(),
-            M: date.getMonth() + 1,
-            d: date.getDate(),
-            H: date.getHours(),
-            h: function() {
-                var h = date.getHours();
-                return h > 12 ? h - 12 : h
-            }(),
-            m: date.getMinutes(),
-            s: date.getSeconds(),
-            S: date.getMilliseconds()
-        };
-        for (var key in map) {
-            format = format.replace(RegExp(key + '+', 'g'), function(s) {
-                return (Array(s.length).join(0) + map[key]).slice(-s.length)
-            })
-        }
-
-        return format.replace(/E+/g, function() {
-            return '星期' + '日一二三四五六'.charAt(date.getDay());
-        })
-    }
 
     // data
     var dates = [];
@@ -157,7 +132,7 @@
         var d = yesterday.getTime() + step * i;
         d = new Date(d);
         if (d >= today) break;
-        dates.push(dateFormat(d, 'HH:mm'));
+        dates.push(d.format('HH:mm'));
     }
 
     // chart
@@ -185,9 +160,11 @@
             '昨UV': false,
         }
     }
+
     var chart = echarts.init(document.getElementById('chart'));
     chart.setOption(chartOption);
     addEventListener('resize', chart.resize);
+
     function pvChartZoom() {
         var cur = (now.getTime() - today.getTime()) / (24 * 60 * 60 * 1000);
         var long = dom.pvTimeLong / (24 * 60 * 60 * 1000);
@@ -215,9 +192,7 @@
     function loadData() {
         // 今天
         loadPvData({
-            // url: 'data/1.json',
-            productId: dom.curProductId,
-            startDate: new Date(tomorrow.getTime() - dom.pvTimeLong),
+            startDate: today,
             endDate: tomorrow,
             success: function(rsp) {
                 // chart
@@ -234,9 +209,7 @@
         });
         // 昨天
         loadPvData({
-            // url: 'data/1.json',
-            productId: dom.curProductId,
-            startDate: new Date(today.getTime() - dom.pvTimeLong),
+            startDate: yesterday,
             endDate: today,
             success: function(rsp) {
                 // chart
@@ -252,41 +225,21 @@
             }
         });
     };
-    loadData()//, setInterval(loadData, 1000 * 60 * .5);
+    loadData() , setInterval(loadData, 1000 * 60 * .5);
 
     function loadPvData(options) {
-        // all url
-        if (dom.curProductId == -1) {
-            options.url = host + '/monitor/qryWdRequireDataOverall';
-        }
 
-        $.ajax({
-            url: options.url || host + '/monitor/qryWdRequireData',
-            url2: 'data/jianquan.json',
-            type: 'post',
-            headers: {
-                'Content-type': 'application/json;charset=UTF-8'
-            },
-            data: JSON.stringify({
-                "productId": options.productId,
-                "startDate": dateFormat(options.startDate, 'yyyyMMddHHmmss'),
-                "endDate": dateFormat(options.endDate, 'yyyyMMddHHmmss'),
+        request({
+            url: dom.productId == -1 ? '/monitor/qryWdRequireDataOverall' : '/monitor/qryWdRequireData',
+            data: {
+                "productId": dom.productId,
+                "startDate": options.startDate.format('yyyyMMddHHmmss'),
+                "endDate": options.endDate.format('yyyyMMddHHmmss'),
                 "statType": "1"
-            }),
-            dataType: 'json',
+            },
             success: function(rsp) {
-                // error
-                if (!rsp || rsp.result) {
-                    wu.toast(rsp.result + ':' + rsp.resultDesc);
-                    return;
-                }
-
                 // handle
                 options.success(rsp);
-            },
-            error: function(rsp) {
-                wu.toast('请求数据出错！');
-                console.log(rsp)
             }
         });
     }

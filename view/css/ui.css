@@ -207,14 +207,31 @@ th{text-align:left}
 /* input */
 input[type=checkbox],
 input[type=radio]{vertical-align:-.25ex}
+input[type=date]{font-size: 0.9765em;padding-right: 0}
 input,button{font:inherit;outline:0}
+input{line-height:1}
 
 input{transition:.3s box-shadow,border}
 input:focus{border-color:#bbb}
 input:not([type=checkbox]):not([type=radio]):focus{box-shadow:0 0 5px 0px #DDD}
 
-button,.button{cursor:pointer;background:#fff;border:solid 1px #ddd}
-button:active,.button:active{box-shadow:0px 1px 5px rgba(0, 0, 0, 0.25) inset}
+.button{cursor:pointer;background:#fff;border:solid 1px #ddd; -webkit-user-select: none;}
+.button.active,.button:active{box-shadow:0px 1px 5px rgba(0, 0, 0, 0.15) inset}
+
+    /* pd1 pdlr bd ra */
+.input,
+.button{display: inline-block;vertical-align: middle;padding: .375em .875em; white-space: nowrap; border: solid 1px #ddd; border-radius: .25em}
+
+/* group */
+.group{display: table;vertical-align: middle;}
+.group>*{display: table-cell;vertical-align: middle;}
+.group>:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0;}
+.group>:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0;}
+.group>:not(:first-child){border-left: 0;}
+
+.group>input{width:100%;}
+.group>:not(input){width:2em;}
+.button>button{border: 0;padding: 0;background: transparent;box-shadow: none !important}
 
 /* flex */
 .flex{display:flex}
@@ -358,7 +375,7 @@ html{line-height:1.5}
 .pdtb3{padding-top:.75em; padding-bottom:.75em}
 .pdtb4{padding-top:1em; padding-bottom:1em}
 
-html{overflow-x: hidden;}
+html,body{overflow-x: hidden;}
 .cellpdlr,.cellpdlr>.cell{padding-left: .5em;padding-right: .5em}
 
 /* border */
@@ -442,6 +459,7 @@ html{overflow-x: hidden;}
 .block{display:block}
 .inline.block{display:inline-block; *display:inline; *zoom:1}
 .inline.table{display:inline-table}
+.inline.group{display:inline-table}
 
 /* float */
 .fl{float:left}

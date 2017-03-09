@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="MobileOptimized" content="320">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="browsermode" content="application">
+    <meta name="x5-page-mode" content="app">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>报表</title>
+    <link rel="stylesheet" type="text/css" href="css/ui.css">
+    <style type="text/css">
+    html {
+        background: #f5f5f5;
+    }
+    
+    .nav_at {
+        color: #0af;
+        border-bottom: solid 1px #0af;
+    }
+    
+    .menu_at {
+        color: #0af;
+    }
+    
+    .btn_at {
+        background: #f5f5f5;
+        color: #111;
+    }
+    </style>
+    <!-- theme -->
+    <style type="text/cssx">
+    html {
+        background: #282D33;
+        color: #cbEEFF;
+    }
+    
+    .sh {
+        box-shadow: 0 1px 5px rgba(4, 0, 0, 0.55)
+    }
+    
+    .bg {
+        background: #182635;
+    }
+    </style>
+    <style type="text/css">
+    .logo {
+        background: #fff url(img/logo.png) center no-repeat;
+        -webkit-background-size: contain;
+        background-size: contain;
+        color: transparent;
+    }
+    </style>
+</head>
+
+<body>
+    <!-- sidebar -->
+    <div class="sidebar">
+        <div class="pd bg c logo">DATA</div>
+        <div class="pd muted">menu</div>
+        <ul class="sidebar-menu">
+            <li>
+                集群管理
+                <ul>
+                    <li>
+                        <a href="实时系统.html">实时系统</a>
+                    </li>
+                    <li>
+                        <a href="离线系统.html">离线系统</a>
+                    </li>
+                    <li>
+                        <a href="用户BI.html">用户BI</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                报表管理
+                <ul>
+                    <li>
+                        <a href="charts.html">实时报表</a>
+                    </li>
+                    <li>
+                        <a href="离线报表.html">离线报表</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                系统管理
+                <ul>
+                    <li>
+                        <a href="用户管理.html">用户管理</a>
+                    </li>
+                    <li>
+                        <a href="角色管理.html">角色管理</a>
+                    </li>
+                    <li>
+                        <a href="权限管理.html">权限管理</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- main -->
+    <div class="layout-main">
+        <!-- navbar -->
+        <div class="bg sh">
+            <div class="w24 mw mglra">
+                <div class="row">
+                    <div class="cell pd sidebar-toggle">三</div>
+                    <div class="cell fr muted">
+                        <div class="cell pd">admin</div>
+                        <div class="cell pd">退出</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main content -->
+        <div>
+            <!-- main -->
+            <div --if="!loading" class="w24 mw pdlr mglra">
+                <!-- path -->
+                <div class="">
+                    <a class="inline block pdlr mgtb" style="padding-left:0" href="index.html">首页</a>
+                    /
+                    <a class="inline block pdlr mgtb" href="charts.html">实时报表</a>
+                    /
+                    <a class="inline block pdlr mgtb" text="nav==0?'门户':'gslb'">-</a>
+                </div>
+                <!-- 产品 -->
+                <div class="">
+                    <div class="w24 mw mglra">
+                        <div class="row">
+                            <div class="cell xs24 none">
+                                <a href="#js" class="cell pdlr pdtb2 curp" .class="{nav_at:nav==0}" click="this.nav=0; loadData(); $event.preventDefault()">门户</a>
+                                <a href="#js" class="cell pdlr pdtb2 curp" .class="{nav_at:nav==1}" click="this.nav=1; loadData(); $event.preventDefault()">gslb</a>
+                                <a href="#js" class="cell pdlr pdtb2">|</a>
+                            </div>
+                            <div class="cell xs24">
+                                <a href="#js" class="cell pdlr pdtb2 curp" .class="{menu_at:productId==3}" click="this.productId=3; loadData(); $event.preventDefault()">总览</a>
+                                <a href="#js" class="cell pdlr pdtb2 curp" .class="{menu_at:productId==0}" click="this.productId=0; loadData(); $event.preventDefault()">视频</a>
+                                <a href="#js" class="cell pdlr pdtb2 curp" .class="{menu_at:productId==1}" click="this.productId=1; loadData(); $event.preventDefault()">影院</a>
+                                <a href="#js" class="cell pdlr pdtb2 curp" .class="{menu_at:productId==2}" click="this.productId=2; loadData(); $event.preventDefault()">直播</a>
+                                <!--  -->
+                                <a href="#js" if="nav==0" class="cell pdlr pdtb2 curp none" click="location.href='auth.html'; $event.preventDefault()">鉴权</a>
+                            </div>
+                            <!-- select -->
+                            <div class="cell xs24 fr">
+                                <div class="group inline mgtb1 mgr">
+                                    <label class="button pdtb1 ra9">
+                                        <input type="checkbox" model="hasUser" change="loadData()"> 用户
+                                    </label>
+                                    <label class="button pdtb1 ra9 ">
+                                        <input type="checkbox" model="hasTourist" change="loadData()"> 游客
+                                    </label>
+                                </div>
+                                <input class="input pdtb1 mgtb1 ra9" type="date" model="date" change="loadData()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 今日流量 -->
+                <div class="pd mgtb bg sh animate fadeInUp-enter">
+                    <table class="wf mgtbw tblf">
+                        <tr class="muted">
+                            <td class="pd1 pdl tr "></td>
+                            <td class="pd1 pdl tr ">PV</td>
+                            <td class="pd1 pdl tr ">UV</td>
+                        </tr>
+                        <tr>
+                            <td class="pd1  ">今日
+                                <span class="success">↑</span>
+                            </td>
+                            <td class="pd1 pdl tr  bold" text="pageData[nav||0][productId||0].pv.today"></td>
+                            <td class="pd1 pdl tr  bold" text="pageData[nav||0][productId||0].uv.today"></td>
+                        </tr>
+                        <tr>
+                            <td class="pd1  ">昨日</td>
+                            <td class="pd1 pdl tr muted" text="pageData[nav||0][productId||0].pv.yesterday"></td>
+                            <td class="pd1 pdl tr muted" text="pageData[nav||0][productId||0].uv.yesterday"></td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- 峰值top -->
+                <div class="pd mgtb bg sh animate fadeInUp-enter ova" style="animation-delay:.15s">
+                    <div class="table w24">
+                        <div class="row">
+                            <div class="cell vab pdlr2 muted" style="height:3em">
+                                PV Top5
+                            </div>
+                            <div each="item in pageData[nav||0][productId||0].pv.tops" class="cell vab pdlr2">
+                                <div class="fs2 muted">{{item.time}}时</div>
+                                {{item.pv}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="cell vab pdlr2 muted" style="height:3em">
+                                UV Top5
+                            </div>
+                            <div each="item in pageData[nav||0][productId||0].uv.tops" class="cell vab pdlr2">
+                                <div class="fs2 muted">{{item.time}}时</div>
+                                {{item.uv}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 图表 -->
+                <div class="row cellpdlr mg-lr mgtb">
+                    <div class="cell w12 xs24">
+                        <div class="pdtb mgb bg sh animate fadeInUp-enter" style="animation-delay:.3s">
+                            <div id="pvChart" class="" style="height:20em;"></div>
+                            <div class="pdlr tac">
+                                <div class="group inline">
+                                    <a href="#js" class="button pd1 ra9" style="width:4em" .class="{btn_at:pvTimeLong==24*60*60*1000}" click="this.pvTimeLong=24*60*60*1000;pvChartZoom();$event.preventDefault()">1 天</a>
+                                    <a href="#js" class="button pd1 ra9" style="width:4em" .class="{btn_at:pvTimeLong==12*60*60*1000}" click="this.pvTimeLong=12*60*60*1000;pvChartZoom();$event.preventDefault()">12小时</a>
+                                    <a href="#js" class="button pd1 ra9" style="width:4em" .class="{btn_at:pvTimeLong==6*60*60*1000}" click="this.pvTimeLong=6*60*60*1000;pvChartZoom();$event.preventDefault()">6小时</a>
+                                    <a href="#js" class="button pd1 ra9" style="width:4em" .class="{btn_at:pvTimeLong==3*60*60*1000}" click="this.pvTimeLong=3*60*60*1000;pvChartZoom();$event.preventDefault()">3小时</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cell w12 xs24">
+                        <div class="pdtb mgb bg sh animate fadeInUp-enter" style="animation-delay:.3s">
+                            <div id="uvChart" class="" style="height:20em;"></div>
+                            <div class="pdlr tac">
+                                <div class="group inline">
+                                    <a href="#js" class="button pd1 ra9" style="width:4em" .class="{btn_at:uvTimeLong==24*60*60*1000}" click="this.uvTimeLong=24*60*60*1000;uvChartZoom();$event.preventDefault()">1 天</a>
+                                    <a href="#js" class="button pd1 ra9" style="width:4em" .class="{btn_at:uvTimeLong==12*60*60*1000}" click="this.uvTimeLong=12*60*60*1000;uvChartZoom();$event.preventDefault()">12小时</a>
+                                    <a href="#js" class="button pd1 ra9" style="width:4em" .class="{btn_at:uvTimeLong==6*60*60*1000}" click="this.uvTimeLong=6*60*60*1000;uvChartZoom();$event.preventDefault()">6小时</a>
+                                    <a href="#js" class="button pd1 ra9" style="width:4em" .class="{btn_at:uvTimeLong==3*60*60*1000}" click="this.uvTimeLong=3*60*60*1000;uvChartZoom();$event.preventDefault()">3小时</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="lib/console.js"></script>
+    <script src="lib/ArrayX.min.js"></script>
+    <script src="lib/Date.pro.format.js"></script>
+    <script src="lib/domTpl.js"></script>
+    <script>
+    var dom = domTpl({
+        loading: true,
+        nav: location.hash.match('gslb') ? 1 : 0, // 0:protal, 1:gslb
+        productId: 3, // 当前产品id
+        pageData: null,
+        pvTimeLong: 24 * 60 * 60 * 1000, // pv线时长
+        uvTimeLong: 24 * 60 * 60 * 1000, // uv 线时长
+        hasUser: true,
+        hasTourist: true,
+        date: new Date().format('yyyy-MM-dd')
+    });
+    </script>
+    <script src="lib/jquery.js"></script>
+    <script src="lib/ajaxr.js"></script>
+    <script src="lib/echarts.common.min.js"></script>
+    <script src="lib/wu.toast.js"></script>
+    <script src="js/chart.option.js"></script>
+    <script src="js/app.js"></script>
+    <script src="css/ui.js"></script>
+    <script type="text/javascript">
+
+    // data
+    var dates = [];
+    var yestodayPvs = [];
+    var yestodayUvs = [];
+    var todayPvs = [];
+    var todayUvs = [];
+
+    // date
+    var now;
+    var today;
+    var yesterday;
+    var tomorrow;
+    var date;
+    var preDate;
+    var nextDate;
+    var updateDate = function() {
+        now = new Date;
+        today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+        tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+        date = new Date(dom.date.replace(/-/g, '/') + ' 00:00:00');
+        preDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
+        nextDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+    }
+    updateDate();
+
+    // dates
+    var dateGap = 1000 * 60 * 5;
+    for (var i = 0; true; i++) {
+        var d = yesterday.getTime() + dateGap * i;
+        d = new Date(d);
+        if (d >= today) break;
+        dates.push(d.format('HH:mm'));
+    }
+
+    // chart
+    var pvChart = echarts.init(document.getElementById('pvChart'));
+    var uvChart = echarts.init(document.getElementById('uvChart'));
+    $.extend(chartOption, {
+        xAxis: {
+            data: dates
+        }
+    });
+    pvChart.setOption($.extend({}, chartOption, {
+        color: ['#0af', '#FFD013'],
+        legend: {
+            data: [{
+                icon: 'circle',
+                name: '今PV'
+            }, {
+                icon: 'circle',
+                name: '昨PV'
+            }]
+        },
+        series: [{
+            name: '今PV',
+            type: 'line',
+            showSymbol: false,
+            lineStyle: {
+                normal: {
+                    width: 1
+                }
+            },
+            data: []
+        }, {
+            name: '昨PV',
+            type: 'line',
+            showSymbol: false,
+            lineStyle: {
+                normal: {
+                    width: 1
+                }
+            },
+            data: []
+        }]
+    }));
+    uvChart.setOption($.extend({}, chartOption, {
+        color: ['#21D100', '#FF6767'],
+        color: ['#0af', '#FFD013'],
+        legend: {
+            data: [{
+                icon: 'circle',
+                name: '今UV'
+            }, {
+                icon: 'circle',
+                name: '昨UV'
+            }]
+        },
+        series: [{
+            name: '今UV',
+            type: 'line',
+            showSymbol: false,
+            lineStyle: {
+                normal: {
+                    width: 1
+                }
+            },
+            data: []
+        }, {
+            name: '昨UV',
+            type: 'line',
+            showSymbol: false,
+            lineStyle: {
+                normal: {
+                    width: 1
+                }
+            },
+            data: []
+        }]
+    }));
+    addEventListener('resize', pvChart.resize);
+    addEventListener('resize', uvChart.resize);
+
+
+    // todo bug 当放大后，数据再加载，图表显示异常
+    function pvChartZoom() {
+        var cur = (now.getTime() - today.getTime()) / (24 * 60 * 60 * 1000);
+        var long = dom.pvTimeLong / (24 * 60 * 60 * 1000);
+        var half = long / 2;
+        var leftLong = half;
+        var rightLong = half;
+        if (cur - half < 0) {
+            leftLong = cur;
+            rightLong += half - cur;
+        }
+        if (cur + half > 1) {
+            rightLong = 1 - cur;
+            leftLong += cur + half - 1;
+        }
+
+        pvChart.dispatchAction({
+            type: 'dataZoom',
+            start: (cur - leftLong) * 100,
+            end: (cur + rightLong) * 100
+        });
+    }
+
+    function uvChartZoom() {
+        var cur = (now.getTime() - today.getTime()) / (24 * 60 * 60 * 1000);
+        var long = dom.uvTimeLong / (24 * 60 * 60 * 1000);
+        var half = long / 2;
+        var leftLong = half;
+        var rightLong = half;
+        if (cur - half < 0) {
+            leftLong = cur;
+            rightLong += half - cur;
+        }
+        if (cur + half > 1) {
+            rightLong = 1 - cur;
+            leftLong += cur + half - 1;
+        }
+
+        uvChart.setOption({
+            dataZoom: [{
+                show: false,
+                start: (cur - leftLong) * 100,
+                end: (cur + rightLong) * 100
+            }],
+        });
+    }
+
+    // 用户 游客
+    function getUserType() {
+        // 0：用户
+        // 1：游客
+        // 2：用户+游客
+        var userType = 2;
+        if (!dom.hasUser) {
+            userType = 1;
+        }
+        if (!dom.hasTourist) {
+            userType = 0
+        }
+        if (!dom.hasUser && !dom.hasTourist) {
+            dom.hasUser = true;
+            dom.$render();
+        }
+
+        return userType
+    }
+
+    // load data
+    function loadData() {
+        // update date
+        updateDate();
+
+        // 页面数据
+        loadPageData({
+            startDate: date,
+            endDate: nextDate,
+            success: function(rsp) {
+                rsp[0] = rsp.pub;
+                rsp[1] = rsp.gslb;
+                dom.pageData = rsp;
+                dom.$render();
+            }
+        });
+
+        // 今天 pv
+        loadPvData({
+            startDate: date,
+            endDate: nextDate,
+            success: function(rsp) {
+                // chart
+                var datas = rsp.datas;
+                pvChart.setOption({
+                    series: [{
+                        name: '今PV',
+                        data: datas.map(function(item) {
+                            return [item.time, item.pv]
+                        })
+                    }]
+                });
+            }
+        });
+
+        // 昨天 pv
+        loadPvData({
+            startDate: preDate,
+            endDate: date,
+            success: function(rsp) {
+                // chart
+                datas = rsp.datas;
+                pvChart.setOption({
+                    series: [{
+                        name: '昨PV',
+                        data: datas.map(function(item) {
+                            return [item.time, item.pv]
+                        })
+                    }]
+                });
+            }
+        });
+
+        // 今天 uv
+        loadUvData({
+            startDate: date,
+            endDate: nextDate,
+            success: function(rsp) {
+                // chart
+                var datas = rsp.datas;
+                uvChart.setOption({
+                    series: [{
+                        name: '今UV',
+                        data: datas.map(function(item) {
+                            return [item.time, item.uv]
+                        })
+                    }]
+                });
+            }
+        });
+
+        // 昨天 uv
+        loadUvData({
+            startDate: preDate,
+            endDate: date,
+            success: function(rsp) {
+                // chart
+                datas = rsp.datas;
+                uvChart.setOption({
+                    series: [{
+                        name: '昨UV',
+                        data: datas.map(function(item) {
+                            return [item.time, item.uv]
+                        })
+                    }]
+                });
+            }
+        });
+    };
+    loadData() , setInterval(loadData, 1000 * 60 * .5);
+
+
+    // 加载pv线
+    function loadPvData(options) {
+        request({
+            url: ['/monitor/qryVisitPvInfo', '/monitor/qryGslbPvInfo'][dom.nav],
+            data: {
+                "productId": dom.productId,
+                "startDate": options.startDate.format('yyyyMMddHHmmss'),
+                "endDate": options.endDate.format('yyyyMMddHHmmss'),
+                "statType": "1",
+                "userType": getUserType()
+            },
+            success: function(rsp) {
+                options.success(rsp);
+            }
+        });
+    }
+
+    // 加载uv线
+    function loadUvData(options) {
+        request({
+            url: ['/monitor/qryVisitUvInfo', '/monitor/qryGslbUvInfo'][dom.nav],
+            data: {
+                "productId": dom.productId,
+                "startDate": options.startDate.format('yyyyMMddHHmmss'),
+                "endDate": options.endDate.format('yyyyMMddHHmmss'),
+                "statType": "1",
+                "userType": getUserType()
+            },
+            success: function(rsp) {
+                options.success(rsp);
+            }
+        });
+    }
+
+    // 加载页面数据
+    function loadPageData() {
+
+        request({
+            url: '/monitor/qryVisitBrief',
+            data: {
+                // "productId": dom.productId,
+                "startDate": date.format('yyyyMMddHHmmss'),
+                "endDate": nextDate.format('yyyyMMddHHmmss'),
+                "userType": getUserType()
+            },
+            success: function(rsp) {
+                rsp[0] = rsp.pub;
+                rsp[1] = rsp.gslb;
+                dom.pageData = rsp;
+                dom.$render();
+            }
+        })
+
+    }
+    </script>
+</body>
+
+</html>
