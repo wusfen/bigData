@@ -17,10 +17,26 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <title></title>
-    <script src="js/index.js"></script>
+    <script src="lib/router.js"></script>
 </head>
 
+<!-- 前端路由
+js 模块化
+页面模块化
+模块管理器
+模块按需加载
+模块预加载
+模块本地存储
+模块版本管理 -->
 <body>
+    <script>
+    router({
+        '*': function() {
+            document.body.innerHTML = 'ok'
+        }
+    })
+    var args = router.args('/:page/:id');
+    </script>
 </body>
 
 </html>

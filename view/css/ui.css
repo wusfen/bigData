@@ -1,38 +1,3 @@
-@import url(module/sidebar.layout.css);
-/*!
- * com
- */
-/* loading */
-.loading{
-	position:fixed;
-	z-index:9999;
-	top:0;
-	bottom:0;
-	left:0;
-	right:0;
-	background:rgba(9, 9, 9, .4);
-	color:#fff;
-	text-align:center;
-	line-height:10em;
-	transition:.3s
-}
-
-
-/* badage */
-.badge{
-	display:inline-block; *display:inline;*zoom:1;
-	padding:0 0.25em;
-	line-height:1.25;
-	font-size:.9em;
-	vertical-align:middle;
-
-	border-radius:9em;
-	background:#999;
-	color:#fff;
-	font-style:normal;
-}
-
-
 /*!
  * classes
  * 20170109 wushufen
@@ -44,6 +9,15 @@ html{font-family:"Microsoft Yahei"; background:#fff; color:#333}
 html{-webkit-tap-highlight-color:transparent}
 img{border:none}
 a{text-decoration:none; color:inherit}
+
+input,
+select,
+textarea,
+button,
+th{font: inherit; color: inherit; }
+
+input[type="radio"],
+input[type="checkbox"]{width: 1em; cursor: pointer}
 
 /* box-sizing */
 html{box-sizing:border-box}
@@ -177,62 +151,6 @@ html{font-size:14px}
 .xsnone{display:none}
 }
 
-/* table */
-table,
-.table{border-collapse:collapse; border-spacing:0}
-th{text-align:left}
-.table{display:table}
-.table>.row{display:table-row}
-.table>.row:before,
-.table>.row:after{display:none}
-.table>.cell,
-.table>.row>.cell{display:table-cell;float:none}
-.tblf{table-layout:fixed}
-
-/* form */
-.form{display:table; width:100%}
-.form>.row{display:table-row}
-.form>.row:before,
-.form>.row:after{display:none}
-.form>.row>.cell{display:table-cell;float:none}
-.form>.row>.cell:before,
-.form>.row>.cell:after{display:none}
-.form>.row>.cell:first-child{width:8%; white-space:nowrap}
-@media (max-width:600px){
-	.form,
-	.form>.row,
-	.form>.row>.cell{display:block}
-}
-
-/* input */
-input[type=checkbox],
-input[type=radio]{vertical-align:-.25ex}
-input[type=date]{font-size: 0.9765em;padding-right: 0}
-input,button{font:inherit;outline:0}
-input{line-height:1}
-
-input{transition:.3s box-shadow,border}
-input:focus{border-color:#bbb}
-input:not([type=checkbox]):not([type=radio]):focus{box-shadow:0 0 5px 0px #DDD}
-
-.button{cursor:pointer;background:#fff;border:solid 1px #ddd; -webkit-user-select: none;}
-.button.active,.button:active{box-shadow:0px 1px 5px rgba(0, 0, 0, 0.15) inset}
-
-    /* pd1 pdlr bd ra */
-.input,
-.button{display: inline-block;vertical-align: middle;padding: .375em .875em; white-space: nowrap; border: solid 1px #ddd; border-radius: .25em}
-
-/* group */
-.group{display: table;vertical-align: middle;}
-.group>*{display: table-cell;vertical-align: middle;}
-.group>:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0;}
-.group>:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0;}
-.group>:not(:first-child){border-left: 0;}
-
-.group>input{width:100%;}
-.group>:not(input){width:2em;}
-.button>button{border: 0;padding: 0;background: transparent;box-shadow: none !important}
-
 /* flex */
 .flex{display:flex}
 .flex>.row{display:flex;flex:1}
@@ -261,6 +179,81 @@ input:not([type=checkbox]):not([type=radio]):focus{box-shadow:0 0 5px 0px #DDD}
 .block>.row,
 .block>.row>.cell,
 .block>.cell{display:block;float:none}
+
+/* table */
+table,
+.table{border-collapse:collapse; border-spacing:0}
+th{text-align:left;}
+.table{display:table}
+.table>.row{display:table-row}
+.table>.row:before,
+.table>.row:after{display:none}
+.table>.cell,
+.table>.row>.cell{display:table-cell;float:none}
+.tblf{table-layout:fixed}
+
+.table {width: 100%}
+.table th {color: #111; white-space: nowrap}
+.table tr:first-child th {background: #FCFCFC; border-bottom: solid 1px #ddd }
+.table th,
+.table td {height: 2.5em;padding: .25em .25em .25em .75em}
+.table th:last-child,
+.table td:last-child {padding-right: .75em}
+.table td {border-bottom: solid 1px #eee }
+
+/* form */
+.form{display:table; width:100%}
+.form>.row{display:table-row}
+.form>.row:before,
+.form>.row:after{display:none}
+.form>.row>.cell{display:table-cell;float:none}
+.form>.row>.cell:before,
+.form>.row>.cell:after{display:none}
+.form>.row>.cell:first-child{width:8%; white-space:nowrap}
+@media (max-width:600px){
+	.form,
+	.form>.row,
+	.form>.row>.cell{display:block}
+}
+
+/* input */
+input[type=checkbox],
+input[type=radio]{vertical-align:-.25ex}
+input[type=date]{padding-right: 0}
+input,button{font:inherit;outline:0}
+input{line-height:1}
+
+input{transition:.3s box-shadow,border}
+input:focus{border-color:#bbb}
+input:not([type=checkbox]):not([type=radio]):focus{box-shadow:0 0 5px 0px #DDD}
+
+.button{cursor:pointer;background:#fff;border:solid 1px #ddd; -webkit-user-select: none;}
+.button.active,.button:active{box-shadow:0px 1px 5px rgba(0, 0, 0, 0.15) inset}
+
+.input,
+.button{display: inline-block;vertical-align: middle;height: 2.5em;padding: .375em .875em; white-space: nowrap; border: solid 1px #ddd; border-radius: .25em}
+
+/* group */
+.group{display: inline-table;vertical-align: middle; padding: 0 !important}
+.group>*{display: table-cell;vertical-align: middle;}
+.group>:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0;}
+.group>:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0;}
+.group>:not(:first-child){border-left: 0;}
+
+.group>input{width:100%;}
+.group>:not(input){width:2em;}
+.button>button{border: 0;padding: 0;height: auto;background: transparent;box-shadow: none !important}
+
+/* size */
+.sz1,.sz1>.input,.sz1>.button{height: 1.5em; padding: 0em .5em}
+.sz2,.sz2>.input,.sz2>.button{height: 1.75em; padding: 0em .625em}
+.sz3,.sz3>.input,.sz3>.button{height: 2em; padding: 0em .75em}
+.sz4,.sz4>.input,.sz4>.button{height: 2.25em; padding: 0em .875em}
+.sz5,.sz5>.input,.sz5>.button{height: 2.5em; padding: 0em 1em}
+.sz6,.sz6>.input,.sz6>.button{height: 2.75em; padding: 0em 1.125em}
+.sz7,.sz7>.input,.sz7>.button{height: 3em; padding: 0em 1.25em}
+.sz8,.sz8>.input,.sz8>.button{height: 3.25em; padding: 0em 1.375em}
+.sz9,.sz9>.input,.sz9>.button{height: 3.5em; padding: 0em 1.5em}
 
 /* width */
 .wa{width:auto}
@@ -386,9 +379,9 @@ html,body{overflow-x: hidden;}
 .bdl{border-left:solid 1px #ddd}
 .bdr{border-right:solid 1px #ddd}
 /* .table border for ra*/
-.table{border-collapse:separate}
-.table>.cell{border-top:0; border-right:0; border-bottom:0}
-.table>.cell:first-child{border-left:0}
+/* .table{border-collapse:separate} */
+/* .table>.cell{border-top:0; border-right:0; border-bottom:0} */
+/* .table>.cell:first-child{border-left:0} */
 
 /* border-radius */
 .ra{border-radius:.25em}

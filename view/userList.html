@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="MobileOptimized" content="320">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="browsermode" content="application">
+    <meta name="x5-page-mode" content="app">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>用户管理</title>
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+</head>
+
+<body>
+    <!-- sidebar -->
+    <div class="sidebar">
+        <div class="pd bg c logo">DATA</div>
+        <div class="pd muted">menu</div>
+        <ul class="sidebar-menu">
+            <li>
+                集群管理
+                <ul>
+                    <li>
+                        <a href="实时系统.html">实时系统</a>
+                    </li>
+                    <li>
+                        <a href="离线系统.html">离线系统</a>
+                    </li>
+                    <li>
+                        <a href="用户BI.html">用户BI</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                报表管理
+                <ul>
+                    <li>
+                        <a href="charts.html">实时报表</a>
+                    </li>
+                    <li>
+                        <a href="离线报表.html">离线报表</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                系统管理
+                <ul>
+                    <li>
+                        <a href="用户管理.html">用户管理</a>
+                    </li>
+                    <li>
+                        <a href="角色管理.html">角色管理</a>
+                    </li>
+                    <li>
+                        <a href="权限管理.html">权限管理</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- main -->
+    <div class="layout-main">
+        <!-- navbar -->
+        <div class="bg sh">
+            <div class="w24 mw mglra">
+                <div class="row">
+                    <div class="cell pd sidebar-toggle">三</div>
+                    <div class="cell fr muted">
+                        <div class="cell pd">admin</div>
+                        <div class="cell pd">退出</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main content -->
+        <div class="pdlr">
+            <div class="row cellpdlr mg-lr">
+                <div class="cell w12 xs24">
+                    <div class="pd bg sh mgt">
+                        <div class="bdb pdb">用户管理</div>
+                        <div class="mgt">
+                            <input class="input sz3 ra9">
+                            <button class="button sz3 ra9">删除</button>
+                            <button class="button sz3 ra9">新增</button>
+                        </div>
+                        <div class="ova mgt">
+                            <table class="table">
+                                <col width="4em">
+                                <tr>
+                                    <th></th>
+                                    <th>用户名</th>
+                                    <th>部门</th>
+                                    <th>操作</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>
+                                            <input type="checkbox" name="">
+                                        </label>
+                                    </td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>
+                                        <a href="">修改</a>
+                                        <a href="">删除</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="mgt">
+                            <div class="group">
+                                <!-- <span class="button sz3 ra9">全选</span> -->
+                                <!-- <span class="button sz3 ra9">删除</span> -->
+                            </div>
+                            <span class="fr">
+                                ← 1/99 →
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cell w12 xs24">
+                    <div class="pd bg sh mgt">
+                        <div class="form mgtb">
+                            <div class="row">
+                                <div class="cell pdb1 pdr tar">用户名</div>
+                                <div class="cell pdb">
+                                    <input class="input w24" placeholder="input...">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="cell pdb1 pdr tar">密码</div>
+                                <div class="cell pdb">
+                                    <input class="input w24" placeholder="input...">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="cell pdb1 pdr tar">性别</div>
+                                <div class="cell pdb">
+                                    <div class="group">
+                                        <label class="button">
+                                            <input type="radio" name="141">男
+                                        </label>
+                                        <label class="button">
+                                            <input type="radio" name="141">女
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="cell pdb1 pdr tar"></div>
+                                <div class="cell pdb">
+                                    <button class="button">确定</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="lib/ArrayX.min.js"></script>
+    <script src="lib/Date.pro.format.js"></script>
+    <script src="lib/domTpl.js"></script>
+    <script src="lib/jquery.js"></script>
+    <script src="lib/ajaxr.js"></script>
+    <script src="lib/echarts.common.min.js"></script>
+    <script src="lib/wu.toast.js"></script>
+    <script src="js/chart.option.js"></script>
+    <script src="js/app.js"></script>
+    <script src="css/ui.js"></script>
+</body>
+
+</html>
