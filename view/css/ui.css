@@ -25,9 +25,18 @@ html{box-sizing:border-box}
 
 /* font-size */
 html{font-size:14px}
-.fs{font-size:14px}
+/* .fs{font-size:14px}
 .fs1{font-size:.625em;line-height:1.1}
 .fs2{font-size:.75em;line-height:1.25}
+.fs3{font-size:.875em}
+.fs4{font-size:1em}
+.fs5{font-size:1.125em}
+.fs6{font-size:1.25em}
+.fs7{font-size:1.375em}
+.fs8{font-size:1.5em} */
+.fs{font-size:14px}
+.fs1{font-size:.625em}
+.fs2{font-size:.75em}
 .fs3{font-size:.875em}
 .fs4{font-size:1em}
 .fs5{font-size:1.125em}
@@ -194,7 +203,7 @@ th{text-align:left;}
 
 .table {width: 100%}
 .table th {color: #111; white-space: nowrap}
-.table tr:first-child th {background: #FCFCFC; border-bottom: solid 1px #ddd }
+.table tr:first-child th {background: #FCFCFC; border-bottom: solid 1px #ddd; border-top: solid 1px #ddd}
 .table th,
 .table td {height: 2.5em;padding: .25em .25em .25em .75em}
 .table th:last-child,
@@ -202,7 +211,7 @@ th{text-align:left;}
 .table td {border-bottom: solid 1px #eee }
 
 /* form */
-.form{display:table; width:100%}
+.form{display:table}
 .form>.row{display:table-row}
 .form>.row:before,
 .form>.row:after{display:none}
@@ -222,16 +231,17 @@ input[type=radio]{vertical-align:-.25ex}
 input[type=date]{padding-right: 0}
 input,button{font:inherit;outline:0}
 input{line-height:1}
+button{cursor: pointer;}
 
-input{transition:.3s box-shadow,border}
-input:focus{border-color:#bbb}
-input:not([type=checkbox]):not([type=radio]):focus{box-shadow:0 0 5px 0px #DDD}
+.input{transition:.3s box-shadow,border}
+.input:focus{border-color:#bbb; box-shadow:0 0 5px 0px #DDD}
 
-.button{cursor:pointer;background:#fff;border:solid 1px #ddd; -webkit-user-select: none;}
+.button{cursor:pointer;text-align: center;background:#fff;border:solid 1px #ddd; -webkit-user-select: none;}
 .button.active,.button:active{box-shadow:0px 1px 5px rgba(0, 0, 0, 0.15) inset}
 
 .input,
 .button{display: inline-block;vertical-align: middle;height: 2.5em;padding: .375em .875em; white-space: nowrap; border: solid 1px #ddd; border-radius: .25em}
+.input{width: 100%;}
 
 /* group */
 .group{display: inline-table;vertical-align: middle; padding: 0 !important}
