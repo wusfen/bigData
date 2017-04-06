@@ -336,8 +336,12 @@
             data: []
         }]
     }));
-    addEventListener('resize', pvChart.resize);
-    addEventListener('resize', uvChart.resize);
+    addEventListener('resize', function () {
+        setTimeout(pvChart.resize, 600)
+    });
+    addEventListener('resize', function () {
+        setTimeout(uvChart.resize, 600)
+    });
 
 
     // todo bug 当放大后，数据再加载，图表显示异常

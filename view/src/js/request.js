@@ -1,3 +1,5 @@
+// import $ from 'lib/jquery.js'
+
 /**
  * 统一数据请求接口
  * @require
@@ -15,29 +17,22 @@
  * @param  {Object} options 参数
  * @return {[type]}         [description]
  */
-function request(options) {
-    var host = 'http://117.131.17.93:8042';
-    var url = options.url;
-    if (!url.match('://')) {
-        url = host + url;
-    }
-    var time = new Date().format('HH:mm:ss SSS');
-    options.data._time_ = time;
-    var data = JSON.stringify(options.data);
+module.exports = function request(options) {
+    var host = (window.localStorage && localStorage.host) || options.host || location.origin;
+    var url = (!options.url.match('://') ? host : '') + options.url;
+    var data = JSON.stringify(options.data || {});
 
     $.ajax({
         url: url,
-        url2: options.url2,
         type: options.type || 'post',
-        headers: {
-            'Content-type': 'application/json;charset=UTF-8'
-        },
+        headers: options.headers || { 'Content-type': 'application/json;charset=UTF-8' },
         data: data,
-        dataType: 'json',
+        dataType: options.dataType || 'json',
         success: function(rsp) {
             // error
-            if (!rsp || rsp.result) {
-                wu.toast(rsp.result + ':' + rsp.resultDesc);
+            if (!rsp || rsp.error || rsp.result) {
+                wu.toast((rsp.error || rsp.result) + ':' + (rsp.msg || rsp.resultDesc));
+                options.error && options.error(rsp);
                 return;
             }
 
@@ -53,7 +48,7 @@ function request(options) {
             }
         },
         error: function(xhr) {
-            wu.toast('请求数据出错！');
+            wu.toast('请求出错！');
             options.error && options.error(xhr);
         }
     });

@@ -1,0 +1,74 @@
+@import url(sidebar.css);
+
+/* 侧边栏布局 */
+
+
+/*
+html.sidebar-layout{
+    body{
+        .sidebar{}
+        .navbar{}
+        .main{}
+    }
+}
+*/
+
+.sidebar-layout,
+.sidebar-layout body {
+    height: 100%;
+}
+
+.layout-main {
+    margin-left: 18em
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.sidebar-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin-left: 18em;
+}
+
+@media (max-width: 957px) {
+    .sidebar,
+    .navbar,
+    .layout-main {
+        transition: .5s;
+    }
+    .sidebar-toggle {
+        display: block;
+    }
+    .sidebar {
+        z-index: 1000;
+        margin-left: -18em;
+    }
+    .navbar {
+        margin-left: 0;
+    }
+    .layout-main {
+        margin-left: 0;
+    }
+    /*js toggle class .sidebar-open at html*/
+    .sidebar-open .sidebar {
+        margin: 0;
+        box-shadow: 5px 0 50px rgba(0, 0, 0, .8);
+    }
+    .sidebar-open .navbar,
+    .sidebar-open .layout-main {
+        margin-right: -18em;
+        margin-left: 18em;
+    }
+}

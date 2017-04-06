@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="MobileOptimized" content="320">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="browsermode" content="application">
+    <meta name="x5-page-mode" content="app">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>bigdata</title>
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <style type="text/css">
+    td {
+        position: relative;
+    }
+    
+    td>input {
+        position: absolute;
+        left: 1px;
+        right: 1px;
+        top: 1px;
+        bottom: 1px;
+        padding-left: .75em;
+        width: 100%;
+        border: none;
+        background: transparent;
+    }
+    
+    td>input:focus {
+        border: solid 1px #ddd;
+        border-width: 0;
+        box-shadow: none !important
+    }
+    </style>
+    <style type="text/css">
+    /* transition */
+    
+    tr {
+        transition: .5s;
+    }
+    
+    .tr-enter,
+    .tr-leave-active {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    
+    .tr-leave-active>td {
+        position: absolute;
+        height: 0;
+        padding: 0;
+        line-height: 0;
+        z-index: -1;
+        opacity: 0;
+    }
+    /*  */
+    
+    .fade {
+        transition: .5s;
+    }
+    
+    .fade-enter,
+    .fade-leave-active {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    
+    .fade-leave-active {
+        position: absolute;
+    }
+    </style>
+    <style type="text/css">
+    .active {
+        border-bottom: solid 1px #0af;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="w960 mw mglra">
+        <!-- menu -->
+        <div class="row mgtb">
+            <div class="cell pdlr pdtb2 curp" :class="{active:curTable==1}" v-on:click="curTable=1">指标</div>
+            <div class="cell pdlr pdtb2 curp" :class="{active:curTable==2}" v-on:click="curTable=2">数据源</div>
+            <div class="cell pdlr pdtb2 curp" :class="{active:curTable==3}" v-on:click="curTable=3">维度</div>
+        </div>
+        <!-- 指标 -->
+        <div v-show="curTable==1" class="row pdlr bg ra sh mgtb">
+            <div class="pdtb pdlr bdb mg-lr">指标</div>
+            <div class="ova mg-lr">
+                <table class="table">
+                    <colgroup>
+                        <col width="4em">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>indexId</th>
+                            <th>indexCname</th>
+                            <th>indexEname</th>
+                            <th>indexClassification</th>
+                            <th>indexAdddate</th>
+                            <th>indexStatus</th>
+                            <th>indexDefinition</th>
+                            <th class="tar">
+                                <transition name="fade">
+                                    <a class="fade" v-bind:key="table1.showAdd" v-on:click.prevent="table1.showAdd=!table1.showAdd" href="">
+                                        {{ table1.showAdd ? '取消' : '添加' }}
+                                    </a>
+                                </transition>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody is="transition-group" name="tr">
+                        <tr v-if="table1.showAdd" v-bind:key="table1.showAdd">
+                            <td>
+                                #
+                            </td>
+                            <td>
+                                <input v-model="table1.newObj.indexCname" v-focus="table1.showAdd" placeholder="">
+                            </td>
+                            <td>
+                                <input v-model="table1.newObj.indexEname" placeholder="">
+                            </td>
+                            <td>
+                                <input v-model="table1.newObj.indexClassification" placeholder="">
+                            </td>
+                            <td>
+                                <input v-model="table1.newObj.indexAdddate" placeholder="">
+                            </td>
+                            <td>
+                                <input v-model="table1.newObj.indexStatus" placeholder="">
+                            </td>
+                            <td>
+                                <input v-model="table1.newObj.indexDefinition" placeholder="">
+                            </td>
+                            <td class="tar nowr">
+                                <a v-on:click.prevent="table1Add" href="">保存</a>
+                                <!-- <a href="">取消</a> -->
+                            </td>
+                        </tr>
+                        <tr v-for="item in table1ListPage" v-bind:key="item.indexId">
+                            <td>
+                                {{item.indexId}}
+                                <input v-model="item.indexId" v-on:input="table1Upate(item)">
+                            </td>
+                            <td>
+                                {{item.indexCname}}
+                                <input v-model="item.indexCname" v-on:input="table1Upate(item)">
+                            </td>
+                            <td>
+                                {{item.indexEname}}
+                                <input v-model="item.indexEname" v-on:input="table1Upate(item)">
+                            </td>
+                            <td>
+                                {{item.indexClassification}}
+                                <input v-model="item.indexClassification" v-on:input="table1Upate(item)">
+                            </td>
+                            <td>
+                                {{item.indexAdddate}}
+                                <input v-model="item.indexAdddate" v-on:input="table1Upate(item)">
+                            </td>
+                            <td>
+                                {{item.indexStatus}}
+                                <input v-model="item.indexStatus" v-on:input="table1Upate(item)">
+                            </td>
+                            <td>
+                                {{item.indexDefinition}}
+                                <input v-model="item.indexDefinition" v-on:input="table1Upate(item)">
+                            </td>
+                            <td class="tar nowr">
+                                <a class="danger" v-on:click.prevent="table1Del(item)" href="">删除</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mgtb tac">
+                <a v-if="table1.page.cur>1" v-on:click.prevent="table1.page.cur--" href="">←</a>
+                <span>
+                    <!-- <input value="1"> -->
+                    {{table1.page.cur}}/{{99}}
+                </span>
+                <a v-on:click.prevent="table1.page.cur++" href="">→</a>
+            </div>
+        </div>
+        <!-- 数据源 -->
+        <div v-show="curTable==2" class="row pdlr bg ra sh mgtb">
+            <div class="pdtb pdlr bdb mg-lr">数据源</div>
+            <div class="ova mg-lr">
+                <table class="table">
+                    <colgroup>
+                        <col width="4em">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>datasourceId</th>
+                            <th>datasourceCname</th>
+                            <th>datasourceEname</th>
+                            <th>datasourceAdddate</th>
+                            <th>datasourceStatus</th>
+                            <th class="tar">
+                                <transition name="fade">
+                                    <a class="fade" v-bind:key="table2.showAdd" v-on:click.prevent="table2.showAdd=!table2.showAdd" href="">
+                                        {{ table2.showAdd ? '取消' : '添加' }}
+                                    </a>
+                                </transition>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody is="transition-group" name="tr">
+                        <tr v-if="table2.showAdd" v-bind:key="table2.showAdd">
+                            <td>
+                                #
+                            </td>
+                            <td>
+                                <input v-model="table2.newObj.datasourceCname" v-focus>
+                            </td>
+                            <td>
+                                <input v-model="table2.newObj.datasourceEname">
+                            </td>
+                            <td>
+                                <input v-model="table2.newObj.datasourceAdddate">
+                            </td>
+                            <td>
+                                <input v-model="table2.newObj.datasourceStatus">
+                            </td>
+                            <td class="tar nowr">
+                                <a v-on:click.prevent="table2Add" href="">保存</a>
+                            </td>
+                        </tr>
+                        <tr v-for="item in table2.list" v-bind:key="item.datasourceId">
+                            <td>
+                                {{item.datasourceId}}
+                                <input v-model="item.datasourceId" v-on:input="table2Upate(item)">
+                            </td>
+                            <td>
+                                {{item.datasourceCname}}
+                                <input v-model="item.datasourceCname" v-on:input="table2Upate(item)">
+                            </td>
+                            <td>
+                                {{item.datasourceEname}}
+                                <input v-model="item.datasourceEname" v-on:input="table2Upate(item)">
+                            </td>
+                            <td>
+                                {{item.datasourceAdddate}}
+                                <input v-model="item.datasourceAdddate" v-on:input="table2Upate(item)">
+                            </td>
+                            <td>
+                                {{item.datasourceStatus}}
+                                <input v-model="item.datasourceStatus" v-on:input="table2Upate(item)">
+                            </td>
+                            <td class="tar nowr">
+                                <a v-on:click.prevent="table2Del(item)" href="">删除</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mgtb tac">
+            </div>
+        </div>
+        <!-- 维度 -->
+        <div v-show="curTable==3" class="row pdlr bg ra sh mgtb">
+            <div class="pdtb pdlr bdb mg-lr">维度</div>
+            <div class="ova mg-lr">
+                <table class="table">
+                    <colgroup>
+                        <col width="4em">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>dimensionId</th>
+                            <th>dimensionCname</th>
+                            <th>dimensionEname</th>
+                            <th>dimensionAdddate</th>
+                            <th>dimensionStatus</th>
+                            <th class="tar">
+                                <transition name="fade">
+                                    <a class="fade" v-bind:key="table3.showAdd" v-on:click.prevent="table3.showAdd=!table3.showAdd" href="">
+                                        {{ table3.showAdd ? '取消' : '添加' }}
+                                    </a>
+                                </transition>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody is="transition-group" name="tr">
+                        <tr v-if="table3.showAdd" v-bind:key="table3.showAdd">
+                            <td>
+                                #
+                            </td>
+                            <td>
+                                <input v-model="table3.newObj.dimensionCname" v-focus>
+                            </td>
+                            <td>
+                                <input v-model="table3.newObj.dimensionEname">
+                            </td>
+                            <td>
+                                <input v-model="table3.newObj.dimensionAdddate">
+                            </td>
+                            <td>
+                                <input v-model="table3.newObj.dimensionStatus">
+                            </td>
+                        </tr>
+                        <tr v-for="item in table3.list" v-bind:key="item.dimensionId">
+                            <td>
+                                {{item.dimensionId}}
+                                <input v-model="item.dimensionId" v-on:input="table3Upate(item)">
+                            </td>
+                            <td>
+                                {{item.dimensionCname}}
+                                <input v-model="item.dimensionCname" v-on:input="table3Upate(item)">
+                            </td>
+                            <td>
+                                {{item.dimensionEname}}
+                                <input v-model="item.dimensionEname" v-on:input="table3Upate(item)">
+                            </td>
+                            <td>
+                                {{item.dimensionAdddate}}
+                                <input v-model="item.dimensionAdddate" v-on:input="table3Upate(item)">
+                            </td>
+                            <td>
+                                {{item.dimensionStatus}}
+                                <input v-model="item.dimensionStatus" v-on:input="table3Upate(item)">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mgtb tac">
+            </div>
+        </div>
+    </div>
+    <script src="lib/vue.js"></script>
+    <script src="lib/jquery.js"></script>
+    <script src="lib/wu.toast.js"></script>
+    <script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            curTable: 1,
+            table1: {
+                showAdd: false,
+                list: null,
+                newObj: {
+                    // indexId: 'auto',
+                    indexCname: '',
+                    indexEname: '',
+                    indexClassification: '',
+                    indexAdddate: '',
+                    indexStatus: '',
+                    indexDefinition: '',
+                },
+                page: {
+                    cur: 1,
+                    count: null
+                }
+            },
+            table2: {
+                showAdd: false,
+                list: null,
+                newObj: {
+                    datasourceId: '',
+                    datasourceCname: '',
+                    datasourceEname: '',
+                    datasourceAdddate: '',
+                    datasourceStatus: '',
+                },
+                page: {
+                    cur: 1,
+                    count: null
+                }
+            },
+            table3: {
+                showAdd: false,
+                list: null,
+                newObj: {
+                    dimensionId: '',
+                    dimensionCname: '',
+                    dimensionEname: '',
+                    dimensionAdddate: '',
+                    dimensionStatus: '',
+                },
+                page: {
+                    cur: 1,
+                    count: null
+                }
+            }
+        },
+        computed: {
+            table1ListPage: function() {
+                var start = (this.table1.page.cur - 1) * 10
+                return (this.table1.list || []).slice(start, start + 10)
+            }
+        },
+        methods: {
+            table1Add: function() {
+                var list = this.table1.list;
+                var newObj = this.table1.newObj;
+
+                // add
+                // list.push(Object.assign({}, newObj))
+                $.ajax({
+                    url: 'http://192.168.1.118:8080/portal/pages/addIndexData',
+                    type: 'post',
+                    data: JSON.stringify(newObj),
+                    headers: {
+                        'Content-type': 'application/json;charset=UTF-8'
+                    },
+                    dataType:'json',
+                    success: function(rsp) {
+                        if (rsp.error) {
+                            wu.toast('error!')
+                            return
+                        }
+
+                        console.log(rsp)
+                        list.unshift(rsp)
+                    }
+                })
+
+                // clear input
+                for (var key in newObj) {
+                    newObj[key] = '';
+                }
+
+                this.showAdd = false
+            },
+            table1Del: function(item) {
+                var list = this.table1.list;
+                $.ajax({
+                    url: 'http://192.168.1.118:8080/portal/dataExtract/IndexDelete',
+                    type: 'post',
+                    data: JSON.stringify([item.indexId]),
+                    headers: {
+                        'Content-type': 'application/json;charset=UTF-8'
+                    },
+                    success: function(rsp) {
+                        if (rsp.error) {
+                            wu.toast('error!')
+                            return
+                        }
+
+                        list.splice(list.indexOf(item), 1);
+                    }
+                })
+            },
+            table1Upate: (function() {
+                var t;
+                var obj;
+                return function(item) {
+                    if (item == obj) {
+                        clearTimeout(t);
+                    }
+                    obj = item;
+                    t = setTimeout(function() {
+                        // update
+
+                        $.ajax({
+                            url: 'http://192.168.1.118:8080/portal/dataExtract/indexUpdate',
+                            type: 'post',
+                            data: JSON.stringify(item),
+                            headers: {
+                                'Content-type': 'application/json;charset=UTF-8'
+                            },
+                            dataType: 'json',
+                            success: function(rsp) {
+                                if (rsp.error) {
+                                    wu.toast(rsp.msg)
+                                    return;
+                                }
+
+
+                                wu.toast('更新成功!')
+
+                            }
+                        })
+
+
+                    }, 800)
+                }
+            })(),
+            table1Load: function() {
+                var vue = this;
+                $.ajax({
+                    url: 'http://192.168.1.118:8080/portal/dataExtract/getIndexData',
+                    success: function(rsp) {
+                        if (rsp.error) {
+                            wu.toast('error')
+                            return
+                        }
+                        vue.table1.list = rsp
+                    }
+                })
+            },
+            table2Load: function() {
+                var vue = this;
+                $.ajax({
+                    url: 'http://192.168.1.118:8080/portal/dataExtract/getDatasourceData',
+                    success: function(rsp) {
+                        if (rsp.error) {
+                            wu.toast('error')
+                            return
+                        }
+                        vue.table2.list = rsp
+                    }
+                })
+            },
+            table3Load: function() {
+                var vue = this;
+                $.ajax({
+                    url: 'http://192.168.1.118:8080/portal/dataExtract/getdDimensionData',
+                    success: function(rsp) {
+                        if (rsp.error) {
+                            wu.toast('error')
+                            return
+                        }
+                        vue.table3.list = rsp
+                    }
+                })
+            }
+        },
+        directives: {
+            focus: {
+                inserted: function(el) {
+                    el.focus()
+                }
+            }
+        }
+    })
+
+    app.table1Load()
+    app.table2Load()
+    app.table3Load()
+    </script>
+</body>
+
+</html>
