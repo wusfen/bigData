@@ -9,18 +9,19 @@
 .pagination a,
 .pagination span{
     float: left;
-    padding: .25em .75em;
+    padding: .375em .875em;
     border: solid 1px #ddd;
     margin-left: -1px;
     margin-top: 2px;
 }
 .pagination a{color: #456; text-decoration: none}
 
+.pagination :active{box-shadow:0px 1px 5px rgba(0, 0, 0, 0.15) inset}
 .pagination .active{
     position: relative;
     z-index: 1;
-    border-color: #FBAD0B;
-    background: #FBAD0B;
+    border-color: #ccc;
+    background: #ccc;
     color: #fff;
 }
 
@@ -45,7 +46,7 @@
     background: #eee;
     white-space: nowrap;
     overflow: hidden;
-     border-radius: .25em; 
+    border-radius: .25em; 
     box-shadow: inset 0px 1px 1px rgba(0,0,0,.15)
 }
 .progress *{
@@ -63,12 +64,12 @@
 .tabs{
     border-bottom: solid 1px #ddd; /*下横线*/
 }
-.tabs{*zoom:1;}
+.tabs{*zoom:1}
 .tabs:after{content: ""; display: table; clear: both;}
 
 .tabs>*{
     float: left;
-    padding: .375em .75em;
+    padding: .375em .875em;
     border: solid 1px transparent;
     border-radius: .25em .25em 0 0;
     margin-bottom: -1px;
@@ -101,10 +102,15 @@
 
 /*  */
 code {
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
     background: #64513b;
+    background: #272822;
+    background: #5b4a34;
+    // background: #634838;
     color: #fff;
-    padding: .2375em .5em;
-    border-radius: .25em
+    padding: .2em .5em;
+    border-radius: .25em;
+    margin: 1px;
 }
 
 
@@ -318,7 +324,7 @@ th{text-align:left;}
 .table th {color: #111; white-space: nowrap}
 .table tr:first-child th {background: #FCFCFC; border-bottom: solid 1px #ddd; border-top: solid 1px #ddd}
 .table th,
-.table td {height: 2.5em;padding: .25em .25em .25em .75em}
+.table td {height: 3em;padding: .25em .25em .25em .75em}
 .table th:last-child,
 .table td:last-child {padding-right: .75em}
 .table td {border-bottom: solid 1px #eee }

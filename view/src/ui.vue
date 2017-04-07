@@ -47,9 +47,9 @@
         <code>.xs(0-24)</code>
         <p>控制<code>.cell</code>在极小设备（手机）下的宽度。<code>.xs0</code>则表示在手机上不显示，以上类推。</p>
         <h3>间距</h3>
-        <code>.mg[tblr][a1234]</code>
-        <p>与其它元素的距离。tblr 表示上下左右，1234 表示大小，a 表示 auto。如<code>.mgtb</code>表示与上下的元素保持一点距离。<code>.mga</code>让元素居中。</p>
-        <code>.pd[tblr][1234]</code>
+        <code>.mg[tblr][01234a]</code>
+        <p>与其它元素的距离。tblr 表示上下左右，01234 表示大小，a 表示 auto。如<code>.mgtb</code>表示与上下的元素保持一点距离。<code>.mga</code>让元素居中。</p>
+        <code>.pd[tblr][01234]</code>
         <p>给元素的内容留白。如<code>.container.pdlr</code>给容器内的内容左右留白。</p>
         <code>.row.cellpdlr</code>
         <p>给每个格子左右留白。</p>
@@ -282,7 +282,7 @@
         <p><code>.active</code>表示当前页</p>
         <div class="row mgtb">
             <div class="pagination">
-                <span class="disable">←</span>
+                <a href="javascript:">←</a>
                 <a href="javascript:">1</a>
                 <a class="active" href="javascript:">5</a>
                 <a href="javascript:">99</a>
@@ -441,15 +441,22 @@
         <div class="bd bg ra sh">
             <div class="pd bdb">标题</div>
             <div class="pdlr">
+            	<div class="row mgtb">
+            		<div class="tabs">
+            			<a class="active" href="">标签</a>
+            			<a href="">标签</a>
+            			<a href="">标签</a>
+            		</div>
+            	</div>
                 <div class="row mgtb">
-                    <div class="group sz3">
-                        <span class="button ra9">btn</span>
-                        <span class="button ra9">btn</span>
-                        <span class="button ra9">btn</span>
+                    <div class="group">
+                        <span class="button">全选</span>
+                        <span class="button">删除</span>
+                        <span class="button">添加</span>
                     </div>
-                    <div class="group sz3 fr">
-                        <input class="input ra9">
-                        <span class="button ra9">搜索</span>
+                    <div class="group fr">
+                        <input class="input">
+                        <span class="button">搜索</span>
                     </div>
                 </div>
                 <div class="ova mg-lr">
@@ -534,14 +541,14 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div class="tac mgtb">
-                        <div class="pagination">
-                            <span class="disable">←</span>
-                            <a href="javascript:">1</a>
-                            <a class="active" href="javascript:">5</a>
-                            <a href="javascript:">99</a>
-                            <a href="javascript:">→</a>
-                        </div>
+                </div>
+                <div class="tac mgtb">
+                    <div class="pagination">
+                        <a href="javascript:">←</a>
+                        <a href="javascript:">1</a>
+                        <a class="active" href="javascript:">5</a>
+                        <a href="javascript:">99</a>
+                        <a href="javascript:">→</a>
                     </div>
                 </div>
             </div>
