@@ -411,6 +411,10 @@
         <div class="row mgtb">
             <code>.ellps</code>
         </div>
+        <h3>粗体</h3>
+        <div class="row mgtb">
+            <code>.bold</code>
+        </div>
         <h3>浮动</h3>
         <div class="row mgtb">
             <code>.f[lr]</code>
@@ -432,6 +436,116 @@
         <code>.lh[1234]</code>
         <h3>指针</h3>
         <code>.curp</code>
+        <h2>综合</h2>
+        <p>以上所有类都可以随意组合，以达到各种不同的效果。</p>
+        <div class="bd bg ra sh">
+            <div class="pd bdb">标题</div>
+            <div class="pdlr">
+                <div class="row mgtb">
+                    <div class="group sz3">
+                        <span class="button ra9">btn</span>
+                        <span class="button ra9">btn</span>
+                        <span class="button ra9">btn</span>
+                    </div>
+                    <div class="group sz3 fr">
+                        <input class="input ra9">
+                        <span class="button ra9">搜索</span>
+                    </div>
+                </div>
+                <div class="ova mg-lr">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>员工姓名</th>
+                                <th>性别</th>
+                                <th>联系方式</th>
+                                <th class="tac">角色</th>
+                                <th class="tac">入职时间</th>
+                                <th class="tac">订单量</th>
+                                <th class="tac">项目量</th>
+                                <th>登录账号</th>
+                                <th class="tac">操作</th>
+                            </tr>
+                            <tr>
+                                <td>xxx</td>
+                                <td>x</td>
+                                <td>xxxxxxxxxxx</td>
+                                <td class="tac">xxx</td>
+                                <td class="tac">xxxx.xx.xx</td>
+                                <td class="tac">
+                                    <span class="x-tag bg-green">xx</span>
+                                </td>
+                                <td class="tac">
+                                    <span class="x-tag bg-blue">xx</span>
+                                </td>
+                                <td>xxxxxxx</td>
+                                <td class="tac">
+                                    <a class="x-edit" href="">
+                                        <i class="fa fa-edit fa-fw"></i>
+                                    </a>
+                                    <a class="x-del" href="">
+                                        <i class="fa fa-remove fa-fw"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>xxx</td>
+                                <td>x</td>
+                                <td>xxxxxxxxxxx</td>
+                                <td class="tac">xxx</td>
+                                <td class="tac">xxxx.xx.xx</td>
+                                <td class="tac">
+                                    <span class="x-tag bg-green">xx</span>
+                                </td>
+                                <td class="tac">
+                                    <span class="x-tag bg-blue">xx</span>
+                                </td>
+                                <td>xxxxxxx</td>
+                                <td class="tac">
+                                    <a class="x-edit" href="">
+                                        <i class="fa fa-edit fa-fw"></i>
+                                    </a>
+                                    <a class="x-del" href="">
+                                        <i class="fa fa-remove fa-fw"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>xxx</td>
+                                <td>x</td>
+                                <td>xxxxxxxxxxx</td>
+                                <td class="tac">xxx</td>
+                                <td class="tac">xxxx.xx.xx</td>
+                                <td class="tac">
+                                    <span class="x-tag bg-green">xx</span>
+                                </td>
+                                <td class="tac">
+                                    <span class="x-tag bg-blue">xx</span>
+                                </td>
+                                <td>xxxxxxx</td>
+                                <td class="tac">
+                                    <a class="x-edit" href="">
+                                        <i class="fa fa-edit fa-fw"></i>
+                                    </a>
+                                    <a class="x-del" href="">
+                                        <i class="fa fa-remove fa-fw"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="tac mgtb">
+                        <div class="pagination">
+                            <span class="disable">←</span>
+                            <a href="javascript:">1</a>
+                            <a class="active" href="javascript:">5</a>
+                            <a href="javascript:">99</a>
+                            <a href="javascript:">→</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <style type="text/css" scoped>
