@@ -55,7 +55,7 @@
                     开发
                     <ul>
                         <li>
-                            <a href="css/ui.html" target="iframe">ui 组件</a>
+                            <a is="router-link" to="/ui">ui 组件</a>
                         </li>
                         <li>
                             <a is="router-link" to="/ajax">接口测试</a>
@@ -92,12 +92,9 @@
         </div>
         <!-- layout main -->
         <div class="layout-main">
-            <!-- main content -->
-            <div class="pdlr">
-                <transition name="fade" mode="out-in">
-                    <router-view class="fade"></router-view>
-                </transition>
-            </div>
+            <transition name="fade" mode="out-in">
+                <router-view class="fade"></router-view>
+            </transition>
         </div>
     </div>
 </template>

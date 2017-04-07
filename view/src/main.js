@@ -13,6 +13,7 @@ import Chart1 from './Chart1.vue'
 import Tishu from './Tishu.vue'
 import ZhibiaoDetail from './ZhibiaoDetail.vue'
 import Iframe from './Iframe.vue'
+import UI from './UI.vue'
 
 
 // window.Vue = Vue
@@ -39,6 +40,9 @@ new Vue({
                 path: '/frame',
                 component: Frame,
                 children: [{
+                    path: '/ui',
+                    component: UI
+                },{
                     path: '/ajax',
                     component: Ajax
                 }, {

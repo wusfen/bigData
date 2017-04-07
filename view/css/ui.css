@@ -1,3 +1,113 @@
+/* 组件 */
+/*  */
+
+.pagination{
+    display: inline-block; *display:inline;*zoom:1;
+    margin-left: 1px; /* 抵消 a 的 margin-left: -1px;*/
+}
+
+.pagination a,
+.pagination span{
+    float: left;
+    padding: .25em .75em;
+    border: solid 1px #ddd;
+    margin-left: -1px;
+    margin-top: 2px;
+}
+.pagination a{color: #456; text-decoration: none}
+
+.pagination .active{
+    position: relative;
+    z-index: 1;
+    border-color: #FBAD0B;
+    background: #FBAD0B;
+    color: #fff;
+}
+
+.pagination input{margin:-3px -10px; border:none; outline:none; background:transparent; color:#fff; width:2em; text-align:center}
+
+.pagination>*:first-child{border-radius: 4px 0 0 4px}
+.pagination>*:last-child{border-radius: 0 4px 4px 0}
+
+/*  */
+
+.path{overflow:hidden;  background: #fcfcfc;  border-radius:4px}
+.path a,
+.path span{position:relative; float:left; padding:.25em .75em}
+.path a{text-decoration:none;}
+.path span{color:#888;}
+.path a + a:before,
+.path a + span:before{content:"/"; position:absolute; left:-.25em; color:#ddd}
+
+/*  */
+
+.progress{
+    background: #eee;
+    white-space: nowrap;
+    overflow: hidden;
+     border-radius: .25em; 
+    box-shadow: inset 0px 1px 1px rgba(0,0,0,.15)
+}
+.progress *{
+    background: #4caf50;
+    color: #FFF;
+    text-align: right;
+    line-height: 1em;
+    max-width: 100%;
+    transition: 0.1s;
+}
+
+/*  */
+
+
+.tabs{
+    border-bottom: solid 1px #ddd; /*下横线*/
+}
+.tabs{*zoom:1;}
+.tabs:after{content: ""; display: table; clear: both;}
+
+.tabs>*{
+    float: left;
+    padding: .375em .75em;
+    border: solid 1px transparent;
+    border-bottom-color: #fff !important;
+    border-radius: .25em .25em 0 0;
+    margin-bottom: -1px;
+}
+
+.tabs>*.active{
+    background: #fff;
+    border-color: #ddd;
+}
+
+/*  */
+.badge{
+    display: inline-block; *display:inline;*zoom:1;
+    padding: 0 0.25em;
+    line-height: 1.25;
+    font-size: .9em;
+    vertical-align: middle;
+
+    border-radius: 9em;
+    background: #13B1FF;
+    color: #fff;
+    font-style: normal;
+}
+
+/*位置*/
+.badge-right .badge{position: absolute; top: 10px; right: 4px;}
+.badge-top-right .badge{position: absolute; top: 0; right: 0}
+
+
+/*  */
+code {
+    background: #64513b;
+    color: #fff;
+    padding: .2375em .5em;
+    border-radius: .25em
+}
+
+
 /*!
  * classes
  * 20170109 wushufen
@@ -79,6 +189,7 @@ html{font-size:14px}
 .w24{width:100%}
 /* middle desktop */
 @media (max-width:1024px) {
+.md0 {display:none}
 .md1 {width:4.166667%}
 .md2 {width:8.333333%}
 .md3 {width:12.5%}
@@ -106,6 +217,7 @@ html{font-size:14px}
 }
 /* pad */
 @media (max-width:900px) {
+.sm0 {display:none}
 .sm1 {width:4.166667%}
 .sm2 {width:8.333333%}
 .sm3 {width:12.5%}
@@ -133,6 +245,7 @@ html{font-size:14px}
 }
 /* mobile */
 @media (max-width:600px) {
+.xs0 {display:none}
 .xs1 {width:4.166667%}
 .xs2 {width:8.333333%}
 .xs3 {width:12.5%}
@@ -210,6 +323,9 @@ th{text-align:left;}
 .table td:last-child {padding-right: .75em}
 .table td {border-bottom: solid 1px #eee }
 
+.table tr:hover td{background: #f7f7f7}
+
+
 /* form */
 .form{display:table}
 .form>.row{display:table-row}
@@ -229,7 +345,7 @@ th{text-align:left;}
 input[type=checkbox],
 input[type=radio]{vertical-align:-.25ex}
 input[type=date]{padding-right: 0}
-input,button{font:inherit;outline:0}
+input,textarea,select,button{font:inherit;outline:0}
 input{line-height:1}
 button{cursor: pointer;}
 
@@ -237,11 +353,14 @@ button{cursor: pointer;}
 .input:focus{border-color:#bbb; box-shadow:0 0 5px 0px #DDD}
 
 .button{cursor:pointer;text-align: center;background:#fff;border:solid 1px #ddd; -webkit-user-select: none;}
-.button.active,.button:active{box-shadow:0px 1px 5px rgba(0, 0, 0, 0.15) inset}
+.button:active{box-shadow:0px 1px 5px rgba(0, 0, 0, 0.15) inset}
+.button.active{background: #f5f5f5}
 
 .input,
 .button{display: inline-block;vertical-align: middle;height: 2.5em;padding: .375em .875em; white-space: nowrap; border: solid 1px #ddd; border-radius: .25em}
 .input{width: 100%;}
+textarea.input{height: auto;}
+select.input{width: auto;}
 
 /* group */
 .group{display: inline-table;vertical-align: middle; padding: 0 !important}
@@ -255,15 +374,15 @@ button{cursor: pointer;}
 .button>button{border: 0;padding: 0;height: auto;background: transparent;box-shadow: none !important}
 
 /* size */
-.sz1,.sz1>.input,.sz1>.button{height: 1.5em; padding: 0em .5em}
-.sz2,.sz2>.input,.sz2>.button{height: 1.75em; padding: 0em .625em}
-.sz3,.sz3>.input,.sz3>.button{height: 2em; padding: 0em .75em}
-.sz4,.sz4>.input,.sz4>.button{height: 2.25em; padding: 0em .875em}
-.sz5,.sz5>.input,.sz5>.button{height: 2.5em; padding: 0em 1em}
-.sz6,.sz6>.input,.sz6>.button{height: 2.75em; padding: 0em 1.125em}
-.sz7,.sz7>.input,.sz7>.button{height: 3em; padding: 0em 1.25em}
-.sz8,.sz8>.input,.sz8>.button{height: 3.25em; padding: 0em 1.375em}
-.sz9,.sz9>.input,.sz9>.button{height: 3.5em; padding: 0em 1.5em}
+.sz1,.sz1>.input,.sz1>.button{height: 1.5em; line-height: 1.5em; padding: 0em .5em}
+.sz2,.sz2>.input,.sz2>.button{height: 1.75em; line-height: 1.75em; padding: 0em .625em}
+.sz3,.sz3>.input,.sz3>.button{height: 2em; line-height: 2em; padding: 0em .75em}
+.sz4,.sz4>.input,.sz4>.button{height: 2.25em; line-height: 2.25em; padding: 0em .875em}
+.sz5,.sz5>.input,.sz5>.button{height: 2.5em; line-height: 2.5em; padding: 0em 1em}
+.sz6,.sz6>.input,.sz6>.button{height: 2.75em; line-height: 2.75em; padding: 0em 1.125em}
+.sz7,.sz7>.input,.sz7>.button{height: 3em; line-height: 3em; padding: 0em 1.25em}
+.sz8,.sz8>.input,.sz8>.button{height: 3.25em; line-height: 3.25em; padding: 0em 1.375em}
+.sz9,.sz9>.input,.sz9>.button{height: 3.5em; line-height: 3.5em; padding: 0em 1.5em}
 
 /* width */
 .wa{width:auto}

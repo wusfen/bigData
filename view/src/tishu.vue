@@ -72,12 +72,12 @@ tr {
 }
 </style>
 <template>
-    <div id="app" class="mw mglra">
+    <div class="container pdlr">
         <!-- menu -->
         <div class="row mgtb">
             <div class="cell pdlr pdtb2 curp" :class="{active:curTable==1}" v-on:click="curTable=1">指标</div>
-            <div class="cell pdlr pdtb2 curp" :class="{active:curTable==2}" v-on:click="curTable=2">数据视图</div>
             <div class="cell pdlr pdtb2 curp" :class="{active:curTable==3}" v-on:click="curTable=3">维度</div>
+            <div class="cell pdlr pdtb2 curp" :class="{active:curTable==2}" v-on:click="curTable=2">数据视图</div>
         </div>
         <!-- 指标 -->
         <div v-if="curTable==1" class="row pdlr bg ra sh mgtb">

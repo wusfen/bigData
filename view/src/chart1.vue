@@ -25,7 +25,7 @@
                                 <input type="checkbox" v-model="hasTourist" change="loadData()"> 游客
                             </label>
                         </div>
-                        <input class="input sz3 mgtb1 ra9" type="date" v-model="dateInput">
+                        <input class="input wa sz3 mgtb1 ra9" type="date" v-model="dateInput">
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 <template>
-    <div class="row mgtb">
+    <div class="row mg">
         <a class="cell flex aic xs24 bg sh ra case" href="#/charts/chart1">
             <span class="cell w12 tar fs8">门户</span>
             <div class="cell w12 tar pdr muted">
