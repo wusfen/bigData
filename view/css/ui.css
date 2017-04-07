@@ -397,6 +397,7 @@ select.input{width: auto;}
 .w960{width:960px}
 .mw{max-width:100%}
 .mw320{max-width:320px}
+.mw960{max-width:960px}
 
 /* height */
 .h{height:1em}

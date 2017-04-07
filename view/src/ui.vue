@@ -1,10 +1,10 @@
 <template>
-    <div class="container mg pd sh">
+    <div id="ui" class="container mg pd sh">
         <h1>UI</h1>
         <p>css doc</p>
         <h2>布局</h2>
         <h3>栅格系统</h3>
-        <code>.container>.row>.cell.w1.md2.sm3.xs4</code>
+        <code>.container>.row>.cell[.w(0-24).md2.sm3.xs4]</code>
         <div class="row mgtb">
             <div class="cell w1 md2 sm3 xs4  bd">1</div>
             <div class="cell w1 md2 sm3 xs4  bd">2</div>
@@ -41,11 +41,11 @@
         <p>用于控制<code>.cell</code>的宽度，没有则按内容宽度靠左排。</p>
         <p>一行分24格。如<code>.cell.w12</code>表示占一行中的12/24，就是一半。</p>
         <code>.md(0-24)</code>
-        <p>控制<code>.cell</code>在中等设备（中等桌面）下的宽度。</p>
+        <p>控制<code>.cell</code>在中等设备（中等桌面）及以下的宽度。</p>
         <code>.sm(0-24)</code>
-        <p>控制<code>.cell</code>在小设备（平板）下的宽度。</p>
+        <p>控制<code>.cell</code>在小设备（平板）及以下的宽度。</p>
         <code>.xs(0-24)</code>
-        <p>控制<code>.cell</code>在极小设备（手机）下的宽度。<code>.xs0</code>则表示在手机上不显示，以上类推。</p>
+        <p>控制<code>.cell</code>在极小设备（手机）及以下的宽度。<code>.xs0</code>则表示在手机上不显示，以上类推。</p>
         <h3>间距</h3>
         <code>.mg[tblr][01234a]</code>
         <p>与其它元素的距离。tblr 表示上下左右，01234 表示大小，a 表示 auto。如<code>.mgtb</code>表示与上下的元素保持一点距离。<code>.mga</code>让元素居中。</p>
@@ -363,7 +363,7 @@
             <button class="button  bgprimary white">.bgprimary</button>
         </div>
         <h3>圆角</h3>
-        <code>.ra[123459]</code>
+        <code>.ra([tblr]|[123459])</code>
         <div class="row mgtb">
             <button class="button  ra">.ra</button>
             <button class="button  ra1">.ra1</button>
@@ -378,9 +378,18 @@
         <code>.sh</code>
         <div class="bg pd ra sh mgtb">.pd.bg.ra.sh.mgtb</div>
         <h3>边框</h3>
-        <code>.bd[tblr]</code>
+        <code>.bd[0tblr]</code>
         <div class="row mgtb">
             <div class="pdtb bdb">.pdtb.bdb</div>
+        </div>
+        <h3>定位</h3>
+        <div class="row mgtb">
+            <code>.rel</code>
+            <code>.abs</code>
+            <code>.l0</code>
+            <code>.r0</code>
+            <code>.t0</code>
+            <code>.b0</code>
         </div>
         <h3>显示</h3>
         <div class="row mgtb">
@@ -423,12 +432,15 @@
         </div>
         <h3>宽</h3>
         <div class="row mgtb">
-            <code>wa</code>
-            <code>wf</code>
-            <code>w320</code>
-            <code>w960</code>
-            <code>mw</code>
-            <code>mw320</code>
+            <code>.w(0-24)</code>
+            <code>.wf</code>
+            <code>.wa</code>
+            <code>.w320</code>
+            <code>.w960</code>
+            <code>.mw</code>
+            <code>.mw320</code>
+            <code>.mw960</code>
+            <code>.fill</code>
         </div>
         <h3>高</h3>
         <code>.h[1234]</code>
@@ -438,14 +450,14 @@
         <code>.curp</code>
         <h2>综合</h2>
         <p>以上所有类都可以随意组合，以达到各种不同的效果。</p>
-        <div class="bd bg ra sh">
+        <div class="row bd bg ra sh">
             <div class="pd bdb">标题</div>
             <div class="pdlr">
             	<div class="row mgtb">
             		<div class="tabs">
-            			<a class="active" href="">标签</a>
-            			<a href="">标签</a>
-            			<a href="">标签</a>
+            			<a class="active" href="javascript:">标签</a>
+            			<a href="javascript:">标签</a>
+            			<a href="javascript:">标签</a>
             		</div>
             	</div>
                 <div class="row mgtb">
@@ -555,7 +567,7 @@
         </div>
     </div>
 </template>
-<style type="text/css" scoped>
+<style type="text/css">
 h1,
 h2,
 h3,
@@ -583,7 +595,7 @@ p {
     color: #555;
 }
 
-.container {
+#ui{
     background: #fff;
 }
 </style>
