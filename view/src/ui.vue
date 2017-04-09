@@ -126,7 +126,9 @@
                 <div class="cell pdbox">
                     <div>.cell</div>
                 </div>
-                <div class="ovh mgbox bd">&nbsp;</div>
+                <div class="ovh mgbox">
+                    &nbsp;
+                </div>
             </div>
         </div>
         <div class="section">
@@ -351,7 +353,7 @@
         <h3>输入</h3>
         <code>.input</code>
         <p>控制输入框的样式，用于<code>&lt;input&gt;</code> <code>&lt;textarea&gt;</code> <code>&lt;select&gt;</code>。可与颜色类结合使用。</p>
-        <div class="row mgtb">
+        <div class="section row">
             <div class="cell">
                 <input class="input" placeholder="input.input">
             </div>
@@ -363,7 +365,23 @@
                     <option>select.input</option>
                 </select>
             </div>
+            <div class="cell">
+                <select class="input" multiple="">
+                    <option>select[multiple].input</option>
+                    <option>option</option>
+                    <option>option</option>
+                    <option>option</option>
+                </select>
+            </div>
         </div>
+        <h3>单选复选</h3>
+		<div class="section">
+			webkit浏览器支持更改外观
+			<input type="checkbox">
+			<input type="checkbox">
+			<input type="radio" name="373">
+			<input type="radio" name="373">
+		</div>
         <!-- ### -->
         <h3>按钮</h3>
         <code>.button</code>
@@ -790,10 +808,10 @@
         <!-- ## -->
         <h2>综合</h2>
         <p>以上所有类都可以随意组合，以达到各种不同的效果。</p>
-        <div class="section ra sh">
+        <div class="section bg bd ra sh">
             <div class="pd bdb">标题</div>
-            <div class="pdlr">
-                <div class="tabs mgtb">
+            <div class="section pdlr">
+                <div class="tabs">
                     <a class="active" href="javascript:">标签</a>
                     <a href="javascript:">标签</a>
                     <a href="javascript:">标签</a>
