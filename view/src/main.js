@@ -20,18 +20,19 @@ import UI from './UI.vue'
 
 Vue.use(VueRouter)
 
-new Vue({
+var app = new Vue({
     render: h => h(App),
     router: new VueRouter({
         routes: [
             // check login
             {
-                path: '',
+                path: '/',
                 beforeEnter: function(to, form, next) {
                     // if login
-                    next({
-                        path: '/home'
-                    })
+                    // next({
+                    //     path: '/home'
+                    // })
+                    app.$router.replace('/home')
                 }
             }, {
                 path: '/login',

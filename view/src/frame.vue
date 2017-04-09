@@ -72,20 +72,20 @@
         </div>
         <!-- navbar -->
         <div class="navbar bg sh">
-            <div class="w24 mw mglra">
+            <div class="container">
                 <div class="row">
                     <div class="cell pd sidebar-toggle">三</div>
-                    <div class="cell">
-                        <a class="inline block pdlr mgtb" href="javascript:history.back()">←</a>
-                        <a class="inline block pdlr mgtb" is="router-link" to="/home">首页</a>
-                        <!--  /
-                            <a class="inline block pdlr mgtb" href="#">path</a>
-                            /
-                            <a class="inline block pdlr mgtb">-</a> -->
+                    <div class="cell pd">
+                        <div class="path">
+                            <a class="" href="javascript:history.back()">←</a>
+                            <a class="" is="router-link" to="/home">首页</a>
+                        </div>
                     </div>
                     <div class="cell fr">
-                        <div class="cell pd xsnone">admin</div>
-                        <div class="cell pd">退出</div>
+                        <div class="row">
+                            <div class="cell pd xsnone">admin</div>
+                            <div class="cell pd">退出</div>
+                        </div>
                     </div>
                 </div>
             </div>
