@@ -20,55 +20,57 @@ import UI from './UI.vue'
 
 Vue.use(VueRouter)
 
+var router = new VueRouter({
+    routes: [
+        // check login
+        {
+            path: '/',
+            beforeEnter: function(to, form, next) {
+                // if login
+                // next({
+                //     path: '/home'
+                // })
+                router.replace('/home')
+            }
+        }, {
+            path: '/login',
+            component: Login
+        }, {
+            path: '/frame',
+            component: Frame,
+            children: [{
+                path: '/ui',
+                component: UI
+            }, {
+                path: '/ajax',
+                component: Ajax
+            }, {
+                path: '/home',
+                component: Home
+            }, {
+                path: '/charts',
+                component: Charts,
+            }, {
+                path: '/charts/chart1',
+                component: Chart1
+            }, {
+                path: '/tishu',
+                component: Tishu
+            }, {
+                path: '/tishu/index/:id',
+                component: ZhibiaoDetail
+            }, {
+                path: '/iframe/:src(.*)',
+                component: Iframe
+            }, ]
+        }, {
+            path: '/tishu2', // ext
+            component: Tishu
+        }
+    ]
+})
+
 var app = new Vue({
     render: h => h(App),
-    router: new VueRouter({
-        routes: [
-            // check login
-            {
-                path: '/',
-                beforeEnter: function(to, form, next) {
-                    // if login
-                    // next({
-                    //     path: '/home'
-                    // })
-                    app.$router.replace('/home')
-                }
-            }, {
-                path: '/login',
-                component: Login
-            }, {
-                path: '/frame',
-                component: Frame,
-                children: [{
-                    path: '/ui',
-                    component: UI
-                },{
-                    path: '/ajax',
-                    component: Ajax
-                }, {
-                    path: '/home',
-                    component: Home
-                }, {
-                    path: '/charts',
-                    component: Charts,
-                }, {
-                    path: '/charts/chart1',
-                    component: Chart1
-                }, {
-                    path: '/tishu',
-                    component: Tishu
-                }, {
-                    path: '/tishu/index/:id',
-                    component: ZhibiaoDetail
-                }, {
-                    path: '/iframe/:src(.*)',
-                    component: Iframe
-                }, ]
-            }, {
-                path: '/tishu2', // ext
-                component: Tishu
-            }
-        ]
-    }),
+    router: router,
 }).$mount('#app')
