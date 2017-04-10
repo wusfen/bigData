@@ -24,6 +24,7 @@
     height: 100%;
     color: #fff;
     background: #1d2939;
+    background: #171613;
 }
 
 .sidebar-header {
@@ -70,7 +71,7 @@
 .sidebar-menu li ul {
     /* display: none; */
     margin-left: -1em;
-    background: #21252d;
+    /* background: #21252d; */
 }
 
 .sidebar-menu li ul li {

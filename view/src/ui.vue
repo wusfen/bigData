@@ -476,26 +476,26 @@
         <!-- ### -->
         <h3>控件组</h3>
         <code>.group</code>
-        <p>将<code>.button</code>或<code>.input</code>包含可将其合并成一组。 </p>
-        <div class="warning">*注意：此时不要直接用<code>button.button</code>，因为无法控制其宽度。可用<code>span.button</code>代替，或用其包含起来<code>span.button>button</code>。</div>
+        <p>将<code>.button</code>或<code>.input</code>包含可将其合并成一组。只保留两端的圆角。</p>
+        <div class="warning">*注意：为了更好的兼容性，此时最好不用<code>button.button</code>，不能保证其宽度正常。可用<code>span.button</code>代替，或用其包含起来<code>span.button>button</code>。</div>
         <p>可给<code>.button</code>加上<code>.active</code>表示选中的状态。</p>
         <p>可结合<code>.w*</code> <code>.xs*</code>等控制宽度。</p>
         <p>可结合<code>.sz*</code>控制大小。</p>
         <div class="section">
-            <div class="group">
-                <span class="button ra9">.button.ra9</span>
-                <span class="button ra9 active">.active</span>
-                <span class="button ra9">.button.ra9</span>
-            </div>
-        </div>
-        <div class="section">
-            <div class="group">
+            <div class="group w24">
                 <input class="input xs0" placeholder="input.input">
-                <span class="input">span.input</span>
+                <span>span</span>
                 <input class="input" placeholder="input.input">
                 <span class="button">
                     <button>span.button</button>
                 </span>
+            </div>
+        </div>
+        <div class="section">
+            <div class="group">
+                <span class="button ra9">.button.ra9</span>
+                <span class="button ra9 active">.button.ra9.active</span>
+                <span class="button ra9">.button.ra9</span>
             </div>
         </div>
         <!-- ## -->

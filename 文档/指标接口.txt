@@ -1,0 +1,12 @@
+登录页面的url：http://192.168.1.100:8080:8080/portal/auth/login
+账号：zhangsan
+密码：123
+
+指标查询
+URL：http://192.168.1.100:8080/portal/dataExtract/getIndexData
+
+数据源查询
+http://192.168.1.100:8080/portal/dataExtract/getDatasourceData
+
+维度查询
+http://192.168.1.100:8080/portal/dataExtract/getdDimensionData
