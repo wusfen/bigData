@@ -1,15 +1,21 @@
-/* 组件 */
-/*  */
+/*!
+ * wui
+ * 20170109 wushufen
+ */
 
+/* 组件 */
+/* 分页 */
 .pagination{
     display: inline-block; *display:inline;*zoom:1;
     margin-left: 1px; /* 抵消 a 的 margin-left: -1px;*/
 }
 
 .pagination a,
-.pagination span{
+.pagination span,
+.pagination input{
     float: left;
     padding: .375em .875em;
+    height: 2.375em;
     border: solid 1px #ddd;
     margin-left: -1px;
     margin-top: 2px;
@@ -17,21 +23,20 @@
 .pagination a{color: #456; text-decoration: none}
 
 .pagination :active{box-shadow:0px 1px 5px rgba(0, 0, 0, 0.15) inset}
-.pagination .active{
+.pagination .active,
+.pagination input{
     position: relative;
     z-index: 1;
     border-color: #888;
-    /* background: #0af; */
-    /* color: #fff; */
 }
 
-.pagination input{margin:-3px -10px; border:none; outline:none; background:transparent; color:#fff; width:2em; text-align:center}
+.pagination input{width:2.375em;padding-left:0;padding-right:0;text-align:center}
+.pagination input:focus{border-color:#bbb;box-shadow:0 0 5px 0px #DDD}
 
 .pagination>*:first-child{border-radius: 4px 0 0 4px}
 .pagination>*:last-child{border-radius: 0 4px 4px 0}
 
-/*  */
-
+/* 路径 */
 .path{overflow:hidden;border-radius:4px}
 .path a,
 .path span{position:relative; float:left; padding:0 1em}
@@ -40,13 +45,12 @@
 .path a + a:before,
 .path a + span:before{content:"/"; position:absolute; left:-.25em; color:#ddd}
 
-/*  */
-
+/* 进度条 */
 .progress{
     background: #eee;
     white-space: nowrap;
     overflow: hidden;
-    border-radius: .25em; 
+    border-radius: .25em;
     box-shadow: inset 0px 1px 1px rgba(0,0,0,.1)
 }
 .progress *{
@@ -60,9 +64,7 @@
     transition: 0.1s;
 }
 
-/*  */
-
-
+/* 标签页 */
 .tabs{
     border-bottom: solid 1px #ddd; /*下横线*/
 }
@@ -83,7 +85,7 @@
     border-bottom-color: #fff;
 }
 
-/*  */
+/* 小气泡 */
 .badge{
     display: inline-block; *display:inline;*zoom:1;
     padding: 0 0.25em;
@@ -97,16 +99,15 @@
     font-style: normal;
 }
 
-/*位置*/
 .badge-right .badge{position: absolute; top: 10px; right: 4px;}
 .badge-top-right .badge{position: absolute; top: 0; right: 0}
 
 
-/*  */
+/* 代码 */
 code {
     font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
     background: #64513b;
-    background: #5b4a34;  
+    background: #5b4a34;
     background: #272822;
     color: #fff;
     color: #c0f9ff;
@@ -115,12 +116,6 @@ code {
     border-radius: .25em;
     margin: 1px;
 }
-
-
-/*!
- * classes
- * 20170109 wushufen
- */
 
 /* reset */
 *{margin:0; padding:0}
@@ -174,7 +169,7 @@ html,body{overflow-x:hidden}
 .row:before,.row:after{content:"";display:table;clear:both}
 .row,.row>.cell{padding-left:.5em;padding-right:.5em}
 
-/* 
+/*
 .rowpd{*zoom:1}
 .rowpd{margin:0 -1em 1em}
 .rowpd:before,.rowpd:after{content:"";display:table;clear:both}
@@ -310,23 +305,35 @@ html,body{overflow-x:hidden}
 .flex>.row{display:flex;flex:1}
 .flex>.row>.cell,.flex>.cell{flex:1}
 
-.aic{align-items: center;}
+.fx{display:flex;flex-direction:row}
+.fxv{display:flex;flex-direction:column}
 
-/* -- flex */
-.fx{display:flex; flex-direction:row}
-.fxv{display:flex; flex-direction:column}
-.fxsb{justify-content:space-between}
-.fxc{justify-content:center}
-.fxm{align-items:center}
-.fxma{align-items:center}
-.fxma *{align-items:center}
+.jcfs{justify-content: flex-start;}
+.jcfe{justify-content: flex-end;}
+.jcc{justify-content: center;}
+.jcsb{justify-content: space-between;}
+.jcsa{justify-content: space-around;}
+
+.aifs{align-items: flex-start;}
+.aife{align-items: flex-end;}
+.aic{align-items: center;}
+.aib{align-items: baseline;}
+.ais{align-items: stretch;}
+
 .fx1{flex:1}
-.fxn{flex:0 0 auto}
+.fx0{flex:0}
 .fx00a{flex:0 0 auto}
 .fx01a{flex:0 1 auto}
 .fx10a{flex:1 0 auto}
 .fx11a{flex:1 1 auto}
-.fxwr{flex-wrap:wrap}
+
+.fxdr{flex-direction: row;}
+.fxdrr{flex-direction: row-reverse;}
+.fxdc{flex-direction: column;}
+.fxdcr{flex-direction: column-reverse;}
+.fxw{flex-wrap: wrap;}
+.fxwn{flex-wrap: nowrap;}
+.fxww{flex-wrap: wrap;}
 
 /* block */
 .block,
@@ -379,15 +386,16 @@ input[type=checkbox],
 input[type=radio]{vertical-align:-.25ex}
 input[type=date]{padding-right: 0}
 input,textarea,select,button{font:inherit;outline:0}
-input{line-height:1}
+input{line-height:1;z-index:1}
 button{cursor:pointer}
+:focus{z-index:2}
 
 .input,
 .button,
-.group>span{vertical-align:middle;height:2.5em;padding:.375em .875em;white-space:nowrap;border:solid 1px #ddd;border-radius:.25em}
+.group>span{vertical-align:middle;height:2.5em;padding:.375em .875em;white-space:nowrap;border:solid 1px #ddd}
 
 .input,
-.button{display:inline-block}
+.button{display:inline-block;border-radius:.25em}
 
 .input{width:100%}
 .button{cursor:pointer;text-align:center;background:#fff;background-image:linear-gradient(-180deg, rgba(255, 255, 255, 0.26) 0%, rgba(243, 243, 243, 0.35) 90%);-webkit-user-select: none}
@@ -398,19 +406,22 @@ select.input{width:auto}
 select[multiple].input{height:auto}
 
 .input{transition:.3s box-shadow,border}
-.input:focus{border-color:#bbb; box-shadow:0 0 5px 0px #DDD}
+.input:focus{border-color:#bbb;box-shadow:0 0 5px 0px #DDD}
 .button:active{box-shadow:0px 1px 5px rgba(0, 0, 0, 0.15) inset}
 .button.active{background: #f5f5f5}
 
 /* group */
-.group{display:inline-table;display:inline-flex;vertical-align: middle; padding: 0 !important}
+.group{display:inline-table;display:inline-flex;vertical-align:middle;padding: 0 !important}
 .group>*{display:table-cell;flex:1;width:auto;vertical-align: middle;}
 .group>:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0;}
 .group>:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0;}
 .group>:not(:first-child){/* border-left:0 */margin-left:-1px}
 
-.group>input{width:101%;flex:99;z-index:1}
+.group>input{width:101%;flex:99}
 .button>button{border:0;padding:0;height:auto;background:transparent;box-shadow:none !important}
+
+.group{border-radius:.25em}
+.group>*{border-radius:inherit}
 
 /* checkbox */
 input[type="checkbox"],

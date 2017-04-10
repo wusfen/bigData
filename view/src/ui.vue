@@ -375,13 +375,13 @@
             </div>
         </div>
         <h3>单选复选</h3>
-		<div class="section">
-			webkit浏览器支持更改外观
-			<input type="checkbox">
-			<input type="checkbox">
-			<input type="radio" name="373">
-			<input type="radio" name="373">
-		</div>
+        <div class="section">
+            webkit浏览器支持更改外观
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="radio" name="373">
+            <input type="radio" name="373">
+        </div>
         <!-- ### -->
         <h3>按钮</h3>
         <code>.button</code>
@@ -476,7 +476,7 @@
         <!-- ### -->
         <h3>控件组</h3>
         <code>.group</code>
-        <p>将<code>.button</code>或<code>.input</code>包含可将其合并成一组。只保留两端的圆角。</p>
+        <p>将<code>.button</code><code>.input</code><code>&lt;span&gt;</code>包含可将其合并成一组。只保留两端的圆角。</p>
         <div class="warning">*注意：为了更好的兼容性，此时最好不用<code>button.button</code>，不能保证其宽度正常。可用<code>span.button</code>代替，或用其包含起来<code>span.button>button</code>。</div>
         <p>可给<code>.button</code>加上<code>.active</code>表示选中的状态。</p>
         <p>可结合<code>.w*</code> <code>.xs*</code>等控制宽度。</p>
@@ -496,6 +496,13 @@
                 <span class="button ra9">.button.ra9</span>
                 <span class="button ra9 active">.button.ra9.active</span>
                 <span class="button ra9">.button.ra9</span>
+            </div>
+        </div>
+        <div class="section">
+            <div class="group ra9">
+                <span class="button">parent.group.ra9</span>
+                <span class="button">.button</span>
+                <span class="button">.button</span>
             </div>
         </div>
         <!-- ## -->
@@ -595,7 +602,7 @@
             <div class="pagination">
                 <a href="javascript:">←</a>
                 <a href="javascript:">1</a>
-                <a class="active" href="javascript:">5</a>
+                <input value="5">
                 <a href="javascript:">99</a>
                 <a href="javascript:">→</a>
             </div>
@@ -918,6 +925,13 @@
                         <a href="javascript:">99</a>
                         <a href="javascript:">→</a>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="pd bd ra9">
+                <div class="pd bd ra">
+                    <span class="bd">span</span>
                 </div>
             </div>
         </div>
