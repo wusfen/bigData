@@ -10,6 +10,7 @@
  * @return {String}
  */
 Date.prototype.format = function(format) {
+    format = format || 'yyyy-MM-dd HH:mm:ss E';
     var date = this;
     var map = {
         y: date.getFullYear(),
@@ -25,13 +26,15 @@ Date.prototype.format = function(format) {
         S: date.getMilliseconds()
     };
     for (var key in map) {
-        format = format.replace(RegExp(key + '+', 'g'), function(s) {
-            return (Array(s.length).join(0) + map[key]).slice(-s.length)
+        format = format.replace(RegExp(key + '+', 'g'), function($) {
+            var v = map[key] + '',
+                x = (Array($.length).join(0) + v).slice(-$.length);
+            return v.length > x.length ? v : x;
         })
     }
 
     return format.replace(/E+/g, function() {
-        return '星期' + '日一二三四五六'.charAt(date.getDay());
+        return (date + '').match('中国') ?
+            '星期' + '日一二三四五六'.charAt(date.getDay()) : date.getDay();
     })
 }
-

@@ -921,17 +921,11 @@
                     <div class="pagination">
                         <a href="javascript:">←</a>
                         <a href="javascript:">1</a>
-                        <a class="active" href="javascript:">5</a>
+                        <!-- <a class="active" href="javascript:">5</a> -->
+                        <input class="active" value="5">
                         <a href="javascript:">99</a>
                         <a href="javascript:">→</a>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="section">
-            <div class="pd bd ra9">
-                <div class="pd bd ra">
-                    <span class="bd">span</span>
                 </div>
             </div>
         </div>

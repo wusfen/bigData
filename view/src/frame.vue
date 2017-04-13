@@ -33,7 +33,7 @@
                     数据提取
                     <ul>
                         <li>
-                            <a is="router-link" to="/tishu">指标配置</a>
+                            <a is="router-link" to="/indexConfig">指标配置</a>
                         </li>
                     </ul>
                 </li>
@@ -79,6 +79,7 @@
                         <div class="path">
                             <a class="" href="javascript:history.back()">←</a>
                             <a class="" is="router-link" to="/home">首页</a>
+                            <a>{{$router.currentRoute.meta.title}}</a>
                         </div>
                     </div>
                     <div class="cell fr">
